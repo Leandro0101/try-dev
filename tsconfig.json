@@ -4,6 +4,14 @@
     "module": "CommonJS",
     "target": "es2019",
     "esModuleInterop": true,
-    "allowJs": true
+    "allowJs": true,
+    "experimentalDecorators": true,        
+    "emitDecoratorMetadata": true,
+    "baseUrl":"./",
+    "paths": {
+      "@/*": ["./*"],
+      "@domain/*": ["src/domain/*"],
+      "@infra/*": ["src/infra/*"],
+    }
   }
 }
