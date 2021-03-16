@@ -1,14 +1,7 @@
 import { createConnection, getConnection } from 'typeorm'
 
 export const connect = async (): Promise<void> => {
-  await createConnection({
-    type: 'postgres',
-    host: 'database',
-    port: 5432,
-    username: 'root',
-    password: 'toor123',
-    database: 'trydev'
-  })
+  await createConnection()
 }
 
 export const disconnect = async (): Promise<void> => {

@@ -1,4 +1,5 @@
 import { connect } from './infra/typeorm/helpers/typeorm'
+import 'reflect-metadata'
 
 connect().then(() => {
   console.log('database connected')

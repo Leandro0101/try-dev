@@ -5,7 +5,10 @@
   "license": "MIT",
   "scripts": {
     "dev": "ts-node-dev -r tsconfig-paths/register --respawn --transpile-only --ignore-watch node_modules src/index.ts",
-    "typeorm": "ts-node-dev node_modules/typeorm/cli.js"
+    "typeorm": "ts-node-dev ./node_modules/typeorm/cli.js",
+    "migrations:run": "sudo docker exec 5e3 yarn typeorm migration:run",
+    "migrations:create": "sudo docker exec 5e3 yarn typeorm migration:create -n",
+    "migrations:revert": "sudo docker exec 5e3 yarn typeorm migration:revert"
   },
   "devDependencies": {
     "@types/typescript": "^2.0.0",
