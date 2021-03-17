@@ -1,10 +1,10 @@
-import { ISolutionEntity, IUserEntity } from '@/src/domain/entities'
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn } from 'typeorm'
+import { IUserEntity } from '@/src/domain/entities'
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, OneToMany } from 'typeorm'
 import { v4 as uuid } from 'uuid'
+import { ProblemModel, SolutionModel } from '.'
 
 @Entity('users')
 export class UserModel implements IUserEntity {
-  solutions: ISolutionEntity[]
   @PrimaryGeneratedColumn('uuid')
   readonly id: string
 
@@ -17,10 +17,16 @@ export class UserModel implements IUserEntity {
   @Column()
   password: string
 
+  @OneToMany(() => SolutionModel, solutionModel => solutionModel.user)
+  solutions: SolutionModel[]
+
+  @OneToMany(() => ProblemModel, problemModel => problemModel.user)
+  problems: ProblemModel[]
+
   @CreateDateColumn()
   created_at: Date
 
-  constructor (props: Omit<UserModel, 'id' | 'created_at' | 'solutions'>) {
+  constructor (props: Omit<UserModel, 'id' | 'created_at' | 'solutions' | 'problems'>) {
     Object.assign(this, props)
     if (!this.id) {
       this.id = uuid()
