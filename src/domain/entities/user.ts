@@ -1,4 +1,4 @@
-import { ISolutionEntity } from './solution'
+import { IProblemEntity, ISolutionEntity } from '.'
 
 export interface IUserEntity {
   id: string
@@ -6,5 +6,6 @@ export interface IUserEntity {
   email: string
   password: string
   solutions: ISolutionEntity[]
+  problems: IProblemEntity[]
   created_at: Date
 }

@@ -23,7 +23,7 @@ export class ProblemModel implements IProblemEntity {
   @CreateDateColumn()
   created_at: Date
 
-  constructor (props: Omit<ProblemModel, 'id' | 'created_at' | 'solutions'>) {
+  constructor (props: Omit<ProblemModel, 'id' | 'created_at' | 'solutions' | 'user'>) {
     Object.assign(this, props)
     if (!this.id) {
       this.id = uuid()

@@ -1,10 +1,20 @@
 import { IProblemEntity } from '@domain/entities'
-import { IAddProblemUseCase } from '@domain/usecases'
+import { IAddProblemUseCase, ICreateProblemModel, ILoadUserByIdUseCase } from '@domain/usecases'
 import { IAddProblemRepository } from '../../repositories'
 
-export class AddProbleService implements IAddProblemUseCase {
-  constructor (private readonly addProblemRepository: IAddProblemRepository) {}
-  async execute (title: string, description: string, userId: string): Promise<IProblemEntity> {
-    return null
+export class AddProblemService implements IAddProblemUseCase {
+  constructor (private readonly addProblemRepository: IAddProblemRepository, private readonly loadUserByIdService: ILoadUserByIdUseCase) {}
+
+  async execute (problemData: ICreateProblemModel): Promise<IProblemEntity> {
+    const user = await this.loadUserByIdService.execute(problemData.userId)
+    const { title, description } = problemData.fields
+
+    if (!user) {
+      throw new Error('User not found')
+    }
+
+    const createdProblem = await this.addProblemRepository.execute({ title, description, user })
+
+    return createdProblem
   }
 }
