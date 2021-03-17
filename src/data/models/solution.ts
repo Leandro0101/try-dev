@@ -1,4 +1,4 @@
-import { ISolutionEntity } from '@/src/domain/entities'
+import { ISolutionEntity } from '@domain/entities'
 import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, ManyToOne } from 'typeorm'
 import { v4 as uuid } from 'uuid'
 import { ProblemModel, UserModel } from '.'

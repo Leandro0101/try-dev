@@ -11,6 +11,7 @@
     "paths": {
       "@/*": ["./*"],
       "@domain/*": ["src/domain/*"],
+      "@data/*": ["src/data/*"],
       "@infra/*": ["src/infra/*"],
     }
   }

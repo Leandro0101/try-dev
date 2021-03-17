@@ -1,6 +1,6 @@
-import { ICreateUserDTO, IReturnUserDTO } from '@/src/domain/dtos'
-import { IAddUserUseCase } from '@/src/domain/usecases/add-user'
-import { IAddUserRepository } from '../repositories/add-user'
+import { ICreateUserDTO, IReturnUserDTO } from '@domain/dtos'
+import { IAddUserUseCase } from '@domain/usecases'
+import { IAddUserRepository } from '../../repositories/'
 
 export class AddUserService implements IAddUserUseCase {
   constructor (private readonly addUserRepository: IAddUserRepository) {}

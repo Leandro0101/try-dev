@@ -1,9 +1,9 @@
-import { UserModel } from '@/src/data/models'
-import { IAddUserRepository } from '@/src/data/repositories/add-user'
-import { ICreateUserDTO } from '@/src/domain/dtos'
-import { IUserEntity } from '@/src/domain/entities'
+import { UserModel } from '@data/models'
+import { IAddUserRepository } from '@data/repositories'
+import { ICreateUserDTO } from '@domain/dtos'
+import { IUserEntity } from '@domain/entities'
 import { getCustomRepository } from 'typeorm'
-import { BaseUserRepository } from './base-user-repository'
+import { BaseUserRepository } from '../base-user-repository'
 
 export class AddUserRepository implements IAddUserRepository {
   async execute (userData: ICreateUserDTO): Promise<IUserEntity> {

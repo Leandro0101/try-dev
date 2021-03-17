@@ -1,5 +1,5 @@
-import { ICreateUserDTO } from '@/src/domain/dtos'
-import { IUserEntity } from '@/src/domain/entities'
+import { ICreateUserDTO } from '@domain/dtos'
+import { IUserEntity } from '@domain/entities'
 
 export interface IAddUserRepository {
   execute: (userData: ICreateUserDTO) => Promise<IUserEntity>

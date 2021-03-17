@@ -1,4 +1,4 @@
-import { IUserEntity } from '@/src/domain/entities'
+import { IUserEntity } from '@domain/entities'
 import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, OneToMany } from 'typeorm'
 import { v4 as uuid } from 'uuid'
 import { ProblemModel, SolutionModel } from '.'
