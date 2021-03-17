@@ -13,6 +13,7 @@
       "@domain/*": ["src/domain/*"],
       "@data/*": ["src/data/*"],
       "@infra/*": ["src/infra/*"],
+      "@presentation/*": ["src/presentation/*"],
     }
   }
 }
