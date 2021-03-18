@@ -1,4 +1,5 @@
 import { IAddUserUseCase } from '@/src/domain/usecases'
+import { ok } from '../../helpers/http'
 import { IController, IHttpRequest, IHttpResponse } from '../../protocols'
 
 export class AddUserController implements IController {
@@ -7,6 +8,6 @@ export class AddUserController implements IController {
     const { name, email, password } = httpRequest.body
     const user = await this.addUserService.execute({ name, email, password })
 
-    return { statusCode: 201, body: user }
+    return ok(user)
   }
 }

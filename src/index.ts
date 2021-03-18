@@ -23,7 +23,7 @@ connect().then(async () => {
   const problem = await addProblemService.execute({ fields: { title: 'big problem', description: 'problem description' }, userId: '5e872438-fa94-42f3-9f48-14e1d9fcce3b' })
   // console.log(user)
   console.log(problem)
-  console.log('APP iniciou')
+  console.log('APP iasdniciou')
 }).catch(error => {
   console.log('OCORREU Umds ERRO')
   console.log(error)

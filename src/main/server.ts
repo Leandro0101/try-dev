@@ -1,7 +1,8 @@
 import { connect } from '../infra/typeorm/helpers/typeorm'
+import app from './config/app'
 
 connect().then(async () => {
-  console.log('APP iniciou')
+  app.listen(3000, () => console.log('RODANDO'))
 }).catch(error => {
   console.log('OCORREU Um ERRO')
   console.log(error)
