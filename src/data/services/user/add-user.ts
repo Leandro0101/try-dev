@@ -9,7 +9,7 @@ export class AddUserService implements IAddUserUseCase {
     const userExists = await this.loadUserByEmailService.execute(userData.email)
 
     if (userExists) {
-      throw new Error('User already exists')
+      return null
     }
 
     return await this.addUserRepository.execute(userData)
