@@ -9,7 +9,7 @@ export class EmailValidation implements IValidation {
     const isValid = this.emailValidator.isValid(input[this.fieldName])
 
     if (!isValid) {
-      return new InvalidParamError(input[this.fieldName])
+      return new InvalidParamError(this.fieldName)
     }
   }
 }
