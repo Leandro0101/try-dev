@@ -6,12 +6,15 @@ export class AddUserService implements IAddUserUseCase {
   constructor (private readonly addUserRepository: IAddUserRepository, private readonly loadUserByEmailService: ILoadUserByEmailUseCase) {}
 
   async execute (userData: ICreateUserDTO): Promise<IReturnUserDTO> {
-    const userExists = await this.loadUserByEmailService.execute(userData.email)
+    const { name, email } = userData
+    const userExists = await this.loadUserByEmailService.execute(email)
 
     if (userExists) {
       return null
     }
 
-    return await this.addUserRepository.execute(userData)
+    // eslint-disable-next-line @typescript-eslint/naming-convention
+    const { id, created_at } = await this.addUserRepository.execute(userData)
+    return { id, name, email, created_at }
   }
 }
