@@ -1,5 +1,4 @@
-import { IProblemEntity } from '@domain/entities'
-import { ICreateProblemDTO } from '../../dtos'
+import { ICreateProblemDTO, IReturnProblemDTO } from '../../dtos'
 
 export interface ICreateProblemModel {
   fields: Omit<ICreateProblemDTO, 'user'>
@@ -7,5 +6,5 @@ export interface ICreateProblemModel {
 }
 
 export interface IAddProblemUseCase {
-  execute: (createProblemData: ICreateProblemModel) => Promise<IProblemEntity>
+  execute: (createProblemData: ICreateProblemModel) => Promise<IReturnProblemDTO>
 }

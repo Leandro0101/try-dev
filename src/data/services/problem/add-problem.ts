@@ -1,20 +1,22 @@
-import { IProblemEntity } from '@domain/entities'
+import { IReturnProblemDTO } from '@domain/dtos'
 import { IAddProblemUseCase, ICreateProblemModel, ILoadUserByIdUseCase } from '@domain/usecases'
 import { IAddProblemRepository } from '../../repositories'
 
 export class AddProblemService implements IAddProblemUseCase {
   constructor (private readonly addProblemRepository: IAddProblemRepository, private readonly loadUserByIdService: ILoadUserByIdUseCase) {}
 
-  async execute (problemData: ICreateProblemModel): Promise<IProblemEntity> {
-    const user = await this.loadUserByIdService.execute(problemData.userId)
+  async execute (problemData: ICreateProblemModel): Promise<IReturnProblemDTO> {
+    const loadedUser = await this.loadUserByIdService.execute(problemData.userId)
     const { title, description } = problemData.fields
 
-    if (!user) {
+    if (!loadedUser) {
       return null
     }
 
-    const createdProblem = await this.addProblemRepository.execute({ title, description, user })
-
-    return createdProblem
+    const { user, ...createdProblem } = await this.addProblemRepository.execute(
+      { title, description, user: loadedUser }
+    )
+    const { password, ...userWithoutPassword } = user
+    return { problem: createdProblem, user: userWithoutPassword }
   }
 }
