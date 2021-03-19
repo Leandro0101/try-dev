@@ -7,7 +7,6 @@ export class LoadUserByEmailRepository implements ILoadUserByEmailRepository {
   async execute (email: string): Promise<IUserEntity> {
     const baseRepository = getCustomRepository(BaseUserRepository)
     const foundUser = await baseRepository.findOne({ email })
-
     return foundUser
   }
 }

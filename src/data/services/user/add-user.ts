@@ -18,8 +18,8 @@ export class AddUserService implements IAddUserUseCase {
 
     const hashedPassword = await this.encrypter.encrypt(userData.password)
     // eslint-disable-next-line @typescript-eslint/naming-convention
-    const { id, created_at } = await this.addUserRepository.execute({ name, email, password: hashedPassword })
+    const { id, created_at, status } = await this.addUserRepository.execute({ name, email, password: hashedPassword })
 
-    return { id, name, email, created_at }
+    return { id, name, email, status, created_at }
   }
 }

@@ -5,7 +5,6 @@
   "username": "root",
   "password": "toor123",
   "database": "trydev",
-  "synchronize": true,
   "entities": ["./src/data/models/**.ts"],
   "migrations": ["./src/infra/typeorm/migrations/**.ts"],
   "cli": {

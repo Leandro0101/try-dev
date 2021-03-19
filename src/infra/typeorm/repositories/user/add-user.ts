@@ -10,7 +10,6 @@ export class AddUserRepository implements IAddUserRepository {
     const user = new UserModel(userData)
     const baseRepository = getCustomRepository(BaseUserRepository)
     const createdUser = await baseRepository.save(user)
-
     return createdUser
   }
 }

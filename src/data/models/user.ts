@@ -1,4 +1,4 @@
-import { IUserEntity } from '@domain/entities'
+import { IStatusUser, IUserEntity } from '@domain/entities'
 import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, OneToMany } from 'typeorm'
 import { v4 as uuid } from 'uuid'
 import { ProblemModel, SolutionModel } from '.'
@@ -23,10 +23,13 @@ export class UserModel implements IUserEntity {
   @OneToMany(() => ProblemModel, problemModel => problemModel.user)
   problems: ProblemModel[]
 
+  @Column({ type: 'enum', enum: IStatusUser })
+  status: IStatusUser
+
   @CreateDateColumn()
   created_at: Date
 
-  constructor (props: Omit<UserModel, 'id' | 'created_at' | 'solutions' | 'problems'>) {
+  constructor (props: Omit<UserModel, 'id' | 'created_at' | 'solutions' | 'problems' | 'status' >) {
     Object.assign(this, props)
     if (!this.id) {
       this.id = uuid()
