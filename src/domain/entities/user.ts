@@ -1,7 +1,7 @@
 import { IProblemEntity, ISolutionEntity } from '.'
 
 export enum IStatusUser {
-  active = 'active', inactive = 'inactive',
+  ACTIVE = 'active', INACTIVE = 'inactive',
 }
 
 export interface IUserEntity {
