@@ -10,7 +10,7 @@ export class AddProblemService implements IAddProblemUseCase {
     const { title, description } = problemData.fields
 
     if (!user) {
-      throw new Error('User not found')
+      return null
     }
 
     const createdProblem = await this.addProblemRepository.execute({ title, description, user })
