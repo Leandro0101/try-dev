@@ -1,6 +1,6 @@
 import { UserModel } from '@data/models'
 import { IAddUserRepository } from '@data/repositories'
-import { ICreateUserDTO } from '@domain/dtos'
+import { ICreateUserDTO } from '@data/dtos'
 import { IUserEntity } from '@domain/entities'
 import { getCustomRepository } from 'typeorm'
 import { BaseUserRepository } from '../base-user-repository'

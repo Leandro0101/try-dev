@@ -1,4 +1,4 @@
-import { IUserEntity } from '../entities'
+import { IUserEntity } from '../../domain/entities'
 
 export interface ICreateProblemDTO {
   user: IUserEntity

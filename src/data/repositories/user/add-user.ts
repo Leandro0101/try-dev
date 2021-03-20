@@ -1,4 +1,4 @@
-import { ICreateUserDTO } from '@domain/dtos'
+import { ICreateUserDTO } from '@data/dtos'
 import { IUserEntity } from '@domain/entities'
 
 export interface IAddUserRepository {

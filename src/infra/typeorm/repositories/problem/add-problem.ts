@@ -1,6 +1,6 @@
 import { ProblemModel } from '@data/models'
 import { IAddProblemRepository } from '@data/repositories'
-import { ICreateProblemDTO } from '@domain/dtos'
+import { ICreateProblemDTO } from '@data/dtos'
 import { IProblemEntity } from '@domain/entities'
 import { getCustomRepository } from 'typeorm'
 import { BaseProblemRepository } from '../base-problem-repository'

@@ -1,4 +1,4 @@
-import { ICreateUserDTO, IReturnUserDTO } from '@domain/dtos'
+import { ICreateUserDTO, IReturnUserDTO } from '@/src/data/dtos'
 import { IAddUserUseCase, ILoadUserByEmailUseCase } from '@domain/usecases'
 import { IEncrypter } from '../../protocols/criptograpy/encrypter'
 import { IAddUserRepository } from '../../repositories/'

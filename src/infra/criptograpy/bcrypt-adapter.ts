@@ -1,5 +1,5 @@
-import { IEncrypter } from '@/src/data/protocols/criptograpy/encrypter'
-import { IHashComparer } from '@/src/data/protocols/criptograpy/hash-comparer'
+import { IEncrypter } from '@data/protocols/criptograpy/encrypter'
+import { IHashComparer } from '@data/protocols/criptograpy/hash-comparer'
 import bcrypt from 'bcrypt'
 
 export class BcryptAdapter implements IEncrypter, IHashComparer {

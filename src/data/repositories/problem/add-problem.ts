@@ -1,4 +1,4 @@
-import { ICreateProblemDTO } from '@domain/dtos'
+import { ICreateProblemDTO } from '@data/dtos'
 import { IProblemEntity } from '@domain/entities'
 
 export interface IAddProblemRepository {

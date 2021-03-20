@@ -1,4 +1,4 @@
-import { IReturnProblemDTO } from '@domain/dtos'
+import { IReturnProblemDTO } from '@data/dtos'
 import { IAddProblemUseCase, ICreateProblemModel, ILoadUserByIdUseCase } from '@domain/usecases'
 import { IAddProblemRepository } from '../../repositories'
 
@@ -17,6 +17,7 @@ export class AddProblemService implements IAddProblemUseCase {
       { title, description, user: loadedUser }
     )
     const { password, ...userWithoutPassword } = user
+
     return { problem: createdProblem, user: userWithoutPassword }
   }
 }

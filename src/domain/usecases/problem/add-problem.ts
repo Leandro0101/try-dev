@@ -1,4 +1,4 @@
-import { ICreateProblemDTO, IReturnProblemDTO } from '../../dtos'
+import { ICreateProblemDTO, IReturnProblemDTO } from '../../../data/dtos'
 
 export interface ICreateProblemModel {
   fields: Omit<ICreateProblemDTO, 'user'>

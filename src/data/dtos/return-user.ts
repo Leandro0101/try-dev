@@ -1,4 +1,4 @@
-import { IStatusUser } from '../entities'
+import { IStatusUser } from '../../domain/entities'
 
 export interface IReturnUserDTO {
   id: string
