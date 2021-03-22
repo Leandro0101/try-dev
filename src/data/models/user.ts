@@ -20,7 +20,7 @@ export class UserModel implements IUserEntity {
   @OneToMany(() => SolutionModel, solutionModel => solutionModel.user)
   solutions: SolutionModel[]
 
-  @OneToMany(() => ProblemModel, problemModel => problemModel.user)
+  @OneToMany(() => ProblemModel, user => UserModel)
   problems: ProblemModel[]
 
   @Column({ type: 'enum', enum: IStatusUser })

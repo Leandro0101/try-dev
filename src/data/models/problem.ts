@@ -14,7 +14,7 @@ export class ProblemModel implements IProblemEntity {
   @Column()
   description: string
 
-  @ManyToOne(() => UserModel, userModel => userModel.problems)
+  @ManyToOne(() => UserModel, problems => ProblemModel)
   user: UserModel
 
   @OneToMany(() => SolutionModel, solutionModel => solutionModel.problem)

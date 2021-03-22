@@ -1,5 +1,6 @@
+import { ILoadUserByIdUseCase } from '@domain/usecases'
+import { IAddProblemUseCase, ICreateProblemModel } from '@domain/usecases/problem/add-problem'
 import { IReturnProblemDTO } from '@data/dtos'
-import { IAddProblemUseCase, ICreateProblemModel, ILoadUserByIdUseCase } from '@domain/usecases'
 import { IAddProblemRepository } from '../../repositories'
 
 export class AddProblemService implements IAddProblemUseCase {
