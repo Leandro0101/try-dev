@@ -17,16 +17,16 @@ export class SolutionModel implements ISolutionEntity {
   @Column()
   stars: number
 
-  @ManyToOne(() => UserModel, userModel => userModel.solutions)
+  @ManyToOne(() => UserModel, solutions => SolutionModel)
   user: UserModel
 
-  @ManyToOne(() => ProblemModel, problemModel => problemModel.solutions)
+  @ManyToOne(() => ProblemModel, solutions => SolutionModel)
   problem: ProblemModel
 
   @CreateDateColumn()
   created_at: Date
 
-  constructor (props: Omit<SolutionModel, 'id' | 'created_at' | 'solutions'>) {
+  constructor (props: Omit<SolutionModel, 'id' | 'created_at' | 'stars'>) {
     Object.assign(this, props)
     if (!this.id) {
       this.id = uuid()

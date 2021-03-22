@@ -1,5 +1,5 @@
-import { ILoadUserByIdUseCase } from '@domain/usecases'
-import { IAddProblemUseCase, ICreateProblemModel } from '@domain/usecases/problem/add-problem'
+import { ILoadUserByIdUseCase, IAddProblemUseCase, ICreateProblemModel } from '@domain/usecases'
+
 import { IReturnProblemDTO } from '@data/dtos'
 import { IAddProblemRepository } from '../../repositories'
 
@@ -17,8 +17,6 @@ export class AddProblemService implements IAddProblemUseCase {
     const { user, ...createdProblem } = await this.addProblemRepository.execute(
       { title, description, user: loadedUser }
     )
-    const { password, ...userWithoutPassword } = user
-
-    return { problem: createdProblem, user: userWithoutPassword }
+    return { problem: createdProblem }
   }
 }

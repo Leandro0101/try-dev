@@ -17,7 +17,7 @@ export class ProblemModel implements IProblemEntity {
   @ManyToOne(() => UserModel, problems => ProblemModel)
   user: UserModel
 
-  @OneToMany(() => SolutionModel, solutionModel => solutionModel.problem)
+  @OneToMany(() => SolutionModel, problem => ProblemModel)
   solutions: SolutionModel[]
 
   @Column({ type: 'enum', enum: IStatusProblem })

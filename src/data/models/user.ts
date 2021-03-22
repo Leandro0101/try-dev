@@ -17,7 +17,7 @@ export class UserModel implements IUserEntity {
   @Column()
   password: string
 
-  @OneToMany(() => SolutionModel, solutionModel => solutionModel.user)
+  @OneToMany(() => SolutionModel, user => UserModel)
   solutions: SolutionModel[]
 
   @OneToMany(() => ProblemModel, user => UserModel)
