@@ -1,8 +1,6 @@
-import { IProblemEntity, IUserEntity } from '@domain/entities'
-
 export interface ICreateSolutionDTO {
-  problem: IProblemEntity
-  user: IUserEntity
-  source_code: string
+  userId: string
+  problemId: string
   description: string
+  source_code: string
 }

@@ -7,7 +7,9 @@ import { SolutionModel } from '@/src/data/models'
 
 export class AddSolutionRepository implements IAddSolutionRepository {
   async execute (createSolutionData: ICreateSolutionDTO): Promise<ISolutionEntity> {
-    const solution = new SolutionModel(createSolutionData)
+    // eslint-disable-next-line @typescript-eslint/naming-convention
+    const { user, problem, source_code, description } = createSolutionData
+    const solution = new SolutionModel({ source_code, description, user, problem })
     const baseRepository = getCustomRepository(BaseSolutionRepository)
     const createdSolution = await baseRepository.save(solution)
 

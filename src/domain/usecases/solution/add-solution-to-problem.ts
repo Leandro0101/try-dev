@@ -1,5 +1,5 @@
 import { ICreateSolutionDTO, IReturnSolutionDTO } from '@data/dtos'
 
-export interface IAddSolutionUseCase {
+export interface IAddSolutionToProblemUseCase {
   execute: (createSolutionData: ICreateSolutionDTO) => Promise<IReturnSolutionDTO>
 }
