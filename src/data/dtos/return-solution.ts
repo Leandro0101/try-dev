@@ -1,5 +1,9 @@
 import { ISolutionEntity } from '@domain/entities'
 
 export interface IReturnSolutionDTO {
-  solution: Omit<ISolutionEntity, 'user' | 'problem'>
+  id: string
+  sourceCode: string
+  description: string
+  stars: number
+  created_at: Date
 }
