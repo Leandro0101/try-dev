@@ -1,5 +1,3 @@
-const SnakeNamingStrategy = require('typeorm-naming-strategies')
-  .SnakeNamingStrategy
 module.exports = {
   type: 'postgres',
   host: 'database',
@@ -12,5 +10,4 @@ module.exports = {
   cli: {
     migrationsDir: './src/infra/typeorm/migrations'
   },
-  namingStrategy: new SnakeNamingStrategy()
 }

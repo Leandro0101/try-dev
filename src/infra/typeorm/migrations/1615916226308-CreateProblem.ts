@@ -9,7 +9,7 @@ export class CreateProblem1615916226308 implements MigrationInterface {
           { name: 'id', type: 'uuid', isPrimary: true },
           { name: 'title', type: 'varchar' },
           { name: 'description', type: 'text' },
-          { name: 'created_at', type: 'timestamp', default: 'now()' }
+          { name: 'createdAt', type: 'timestamp', default: 'now()' }
         ]
       })
     )

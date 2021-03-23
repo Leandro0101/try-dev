@@ -3,12 +3,12 @@ import { MigrationInterface, QueryRunner, TableColumn, TableForeignKey } from 't
 export class AddColumnUserAtProblems1615917795842 implements MigrationInterface {
   public async up (queryRunner: QueryRunner): Promise<void> {
     await queryRunner.addColumns('problems', [new TableColumn({
-      name: 'user_id',
+      name: 'userId',
       type: 'uuid'
     })])
 
     await queryRunner.createForeignKey('problems', new TableForeignKey({
-      columnNames: ['user_id'],
+      columnNames: ['userId'],
       referencedColumnNames: ['id'],
       referencedTableName: 'users',
       onDelete: 'RESTRICT'
@@ -16,6 +16,6 @@ export class AddColumnUserAtProblems1615917795842 implements MigrationInterface 
   }
 
   public async down (queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.query('ALTER TABLE "problems" DROP CONSTRAINT "user_id"')
+    await queryRunner.query('ALTER TABLE "problems" DROP COLUMN "userId"')
   }
 }

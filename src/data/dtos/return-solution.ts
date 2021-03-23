@@ -5,5 +5,5 @@ export interface IReturnSolutionDTO {
   sourceCode: string
   description: string
   stars: number
-  created_at: Date
+  createdAt: Date
 }

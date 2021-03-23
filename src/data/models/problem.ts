@@ -24,9 +24,9 @@ export class ProblemModel implements IProblemEntity {
   status: IStatusProblem
 
   @CreateDateColumn()
-  created_at: Date
+  createdAt: Date
 
-  constructor (props: Omit<ProblemModel, 'id' | 'created_at' | 'solutions' | 'user' | 'status'>) {
+  constructor (props: Omit<ProblemModel, 'id' | 'createdAt' | 'solutions' | 'user' | 'status'>) {
     Object.assign(this, props)
     if (!this.id) {
       this.id = uuid()

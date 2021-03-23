@@ -12,5 +12,5 @@ export interface IUserEntity {
   solutions: ISolutionEntity[]
   problems: IProblemEntity[]
   status: IStatusUser
-  created_at: Date
+  createdAt: Date
 }

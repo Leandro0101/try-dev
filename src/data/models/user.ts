@@ -27,9 +27,9 @@ export class UserModel implements IUserEntity {
   status: IStatusUser
 
   @CreateDateColumn()
-  created_at: Date
+  createdAt: Date
 
-  constructor (props: Omit<UserModel, 'id' | 'created_at' | 'solutions' | 'problems' | 'status' >) {
+  constructor (props: Omit<UserModel, 'id' | 'createdAt' | 'solutions' | 'problems' | 'status' >) {
     Object.assign(this, props)
     if (!this.id) {
       this.id = uuid()

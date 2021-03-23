@@ -7,19 +7,19 @@ export class CreateSolution1615917303785 implements MigrationInterface {
         name: 'solutions',
         columns: [
           { name: 'id', type: 'uuid', isPrimary: true },
-          { name: 'source_code', type: 'text' },
+          { name: 'sourceCode', type: 'text' },
           { name: 'description', type: 'text' },
           { name: 'stars', type: 'int', default: 0 },
-          { name: 'user_id', type: 'uuid' },
-          { name: 'problem_id', type: 'uuid' },
-          { name: 'created_at', type: 'timestamp', default: 'now()' }
+          { name: 'userId', type: 'uuid' },
+          { name: 'problemId', type: 'uuid' },
+          { name: 'createdAt', type: 'timestamp', default: 'now()' }
         ],
         foreignKeys: [
           {
             name: 'FKUser',
             referencedTableName: 'users',
             referencedColumnNames: ['id'],
-            columnNames: ['user_id'],
+            columnNames: ['userId'],
             onDelete: 'RESTRICT',
             onUpdate: 'CASCADE'
           },
@@ -27,7 +27,7 @@ export class CreateSolution1615917303785 implements MigrationInterface {
             name: 'FKProblem',
             referencedTableName: 'problems',
             referencedColumnNames: ['id'],
-            columnNames: ['problem_id'],
+            columnNames: ['problemId'],
             onDelete: 'RESTRICT',
             onUpdate: 'CASCADE'
           }

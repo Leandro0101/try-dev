@@ -5,5 +5,5 @@ export interface IReturnUserDTO {
   name: string
   email: string
   status: IStatusUser
-  created_at: Date
+  createdAt: Date
 }

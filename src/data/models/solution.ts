@@ -9,7 +9,7 @@ export class SolutionModel implements ISolutionEntity {
   readonly id: string
 
   @Column()
-  source_code: string
+  sourceCode: string
 
   @Column()
   description: string
@@ -24,9 +24,9 @@ export class SolutionModel implements ISolutionEntity {
   problem: ProblemModel
 
   @CreateDateColumn()
-  created_at: Date
+  createdAt: Date
 
-  constructor (props: Omit<SolutionModel, 'id' | 'created_at' | 'stars'>) {
+  constructor (props: Omit<SolutionModel, 'id' | 'createdAt' | 'stars'>) {
     Object.assign(this, props)
     if (!this.id) {
       this.id = uuid()
