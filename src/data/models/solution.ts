@@ -26,7 +26,7 @@ export class SolutionModel implements ISolutionEntity {
   @CreateDateColumn()
   createdAt: Date
 
-  constructor (props: Omit<SolutionModel, 'id' | 'createdAt' | 'stars'>) {
+  constructor (props: Omit<SolutionModel, 'id' | 'createdAt' | 'stars' | 'user' | 'problem'>) {
     Object.assign(this, props)
     if (!this.id) {
       this.id = uuid()
