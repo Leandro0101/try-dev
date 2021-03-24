@@ -4,7 +4,8 @@ export const adaptRoute = (controller: IController): any => {
   return async (req: Request, res: Response) => {
     const httpRequest: IHttpRequest = {
       body: req.body,
-      params: req.params
+      params: req.params,
+      query: req.query
     }
 
     const httpResponse: IHttpResponse = await controller.handle(httpRequest)
