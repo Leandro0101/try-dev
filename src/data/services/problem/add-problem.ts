@@ -10,9 +10,7 @@ export class AddProblemService implements IAddProblemUseCase {
     const loadedUser = await this.loadUserByIdService.execute(problemData.userId)
     const { title, description } = problemData.fields
 
-    if (!loadedUser) {
-      return null
-    }
+    if (!loadedUser) return null
 
     const { user, ...createdProblem } = await this.addProblemRepository.execute(
       { title, description, user: loadedUser }

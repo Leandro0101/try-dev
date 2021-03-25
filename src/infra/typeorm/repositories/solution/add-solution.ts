@@ -10,8 +10,10 @@ export class AddSolutionRepository implements IAddSolutionRepository {
     const { sourceCode, description, problem, user } = createSolutionData
     const solution = new SolutionModel({ sourceCode, description })
     const baseRepository = getCustomRepository(BaseSolutionRepository)
+
     solution.user = user
     solution.problem = problem
+
     const createdSolution = await baseRepository.save(solution)
 
     return createdSolution

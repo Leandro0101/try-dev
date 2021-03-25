@@ -28,8 +28,6 @@ export class ProblemModel implements IProblemEntity {
 
   constructor (props: Omit<ProblemModel, 'id' | 'createdAt' | 'solutions' | 'user' | 'status'>) {
     Object.assign(this, props)
-    if (!this.id) {
-      this.id = uuid()
-    }
+    if (!this.id) this.id = uuid()
   }
 }

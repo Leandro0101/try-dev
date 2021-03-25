@@ -12,9 +12,7 @@ export class AddUserService implements IAddUserUseCase {
     const { name, email } = userData
     const userExists = await this.loadUserByEmailService.execute(email)
 
-    if (userExists) {
-      return null
-    }
+    if (userExists) return null
 
     const hashedPassword = await this.encrypter.encrypt(userData.password)
     const { id, createdAt, status } = await this.addUserRepository.execute({ name, email, password: hashedPassword })

@@ -28,8 +28,6 @@ export class SolutionModel implements ISolutionEntity {
 
   constructor (props: Omit<SolutionModel, 'id' | 'createdAt' | 'stars' | 'user' | 'problem'>) {
     Object.assign(this, props)
-    if (!this.id) {
-      this.id = uuid()
-    }
+    if (!this.id) this.id = uuid()
   }
 }

@@ -31,8 +31,6 @@ export class UserModel implements IUserEntity {
 
   constructor (props: Omit<UserModel, 'id' | 'createdAt' | 'solutions' | 'problems' | 'status' >) {
     Object.assign(this, props)
-    if (!this.id) {
-      this.id = uuid()
-    }
+    if (!this.id) this.id = uuid()
   }
 }

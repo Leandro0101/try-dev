@@ -8,16 +8,12 @@ export class AddUserController implements IController {
   async handle (httpRequest: IHttpRequest): Promise<IHttpResponse> {
     const error = this.validation.validate(httpRequest.body)
 
-    if (error) {
-      return badRequest(error)
-    }
+    if (error) return badRequest(error)
 
     const { name, email, password } = httpRequest.body
     const user = await this.addUserService.execute({ name, email, password })
 
-    if (!user) {
-      return forbidden(new EmailAlreadyRegisterError(email))
-    }
+    if (!user) return forbidden(new EmailAlreadyRegisterError(email))
 
     return ok(user)
   }

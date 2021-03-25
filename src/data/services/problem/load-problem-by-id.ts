@@ -7,9 +7,7 @@ export class LoadProblemByIdService implements ILoadProblemByIdUseCase {
   async execute (problemId: string): Promise<IProblemEntity> {
     const problem = await this.loadProblemByIdRepository.execute(problemId)
 
-    if (!problem) {
-      return null
-    }
+    if (!problem) return null
 
     return problem
   }
