@@ -1,12 +1,11 @@
-import { IProblemEntity } from './problem'
-import { IUserEntity } from './user'
+import { IStarEntity, IUserEntity, IProblemEntity } from '.'
 
 export interface ISolutionEntity {
   id: string
   sourceCode: string
   description: string
-  stars: number
   user: IUserEntity
+  stars: IStarEntity[]
   problem: IProblemEntity
   createdAt: Date
 }

@@ -1,7 +1,10 @@
 import { ISolutionEntity } from '@domain/entities'
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, ManyToOne } from 'typeorm'
+import {
+  Entity, PrimaryGeneratedColumn, Column,
+  CreateDateColumn, ManyToOne, OneToMany
+} from 'typeorm'
 import { v4 as uuid } from 'uuid'
-import { ProblemModel, UserModel } from '.'
+import { ProblemModel, StarModel, UserModel } from '.'
 
 @Entity('solutions')
 export class SolutionModel implements ISolutionEntity {
@@ -14,19 +17,19 @@ export class SolutionModel implements ISolutionEntity {
   @Column()
   description: string
 
-  @Column()
-  stars: number
-
   @ManyToOne(() => UserModel, solutions => SolutionModel)
   user: UserModel
 
   @ManyToOne(() => ProblemModel, solutions => SolutionModel)
   problem: ProblemModel
 
+  @OneToMany(() => StarModel, solution => SolutionModel)
+  stars: StarModel[]
+
   @CreateDateColumn()
   createdAt: Date
 
-  constructor (props: Omit<SolutionModel, 'id' | 'createdAt' | 'stars' | 'user' | 'problem'>) {
+  constructor (props: Omit<SolutionModel, 'id' | 'createdAt' | 'user' | 'problem' | 'stars'>) {
     Object.assign(this, props)
     if (!this.id) this.id = uuid()
   }
