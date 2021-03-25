@@ -1,5 +1,5 @@
-import { UUIDValidatorAdapter } from '@infra/validators/uuid-validator-adapter'
-import { UUIDValidation } from '@/src/validations/validators/uuid-validation'
+import { UUIDValidatorAdapter } from '@infra/validators'
+import { UUIDValidation } from '@/src/validations/validators'
 import { IValidation } from '@presentation/protocols'
 import { ValidationComposite } from '@validations/validators'
 

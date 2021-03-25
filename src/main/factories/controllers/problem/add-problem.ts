@@ -1,6 +1,6 @@
-import { AddProblemController } from '@presentation/controllers/problem/add-problem'
+import { AddProblemController } from '@presentation/controllers'
 import { IController } from '@presentation/protocols'
-import { makeAddProblemService } from '../../services/problem/add-problem'
+import { makeAddProblemService } from '../../services/'
 import { makeAddProblemValidation } from './add-problem-validations'
 
 export const makeAddProblemController = (): IController => {
