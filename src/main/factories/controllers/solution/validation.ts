@@ -4,7 +4,7 @@ import { RequiredParamValidation, ValidationComposite } from '@validations/valid
 export const makeValidationComposite = (): ValidationComposite => {
   const validations: IValidation[] = []
 
-  for (const field of ['title', 'description', 'userId']) {
+  for (const field of ['description', 'sourceCode']) {
     validations.push(new RequiredParamValidation(field))
   }
 

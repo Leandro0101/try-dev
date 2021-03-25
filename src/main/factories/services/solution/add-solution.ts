@@ -1,21 +1,19 @@
 import {
-  LoadUserByIdRepository, LoadProblemByIdRepository, AddSolutionToProblemRepository,
-  AddSolutionToUserRepository, AddSolutionRepository
+  LoadUserByIdRepository, LoadProblemByIdRepository, AddSolutionRepository
 } from '@infra/typeorm/repositories'
 
 import {
-  AddSolutionService, LoadOneProblemAndUserService,
-  LoadProblemByIdService, LoadUserByIdService
+  AddSolutionService, LoadOneProblemAndUserService, LoadProblemByIdService,
+  LoadUserByIdService
 } from '@data/services'
 
 import {
-  IAddSolutionUseCase, ILoadOneProblemAndUserUseCase,
-  ILoadProblemByIdUseCase, ILoadUserByIdUseCase
+  IAddSolutionUseCase, ILoadOneProblemAndUserUseCase, ILoadProblemByIdUseCase,
+  ILoadUserByIdUseCase
 } from '@domain/usecases'
 
 import {
-  IAddSolutionRepository, IAddSolutionToProblemRepository, IAddSolutionToUserRepository,
-  ILoadProblemByIdRepository, ILoadUserByIdRepository
+  IAddSolutionRepository, ILoadProblemByIdRepository, ILoadUserByIdRepository
 } from '@data/repositories'
 
 export const makeAddSolutionService = (): IAddSolutionUseCase => {
@@ -27,13 +25,10 @@ export const makeAddSolutionService = (): IAddSolutionUseCase => {
     loadUserByIdService, loadProblemByIdService
   )
 
-  const addSolutionToProblemRepository: IAddSolutionToProblemRepository = new AddSolutionToProblemRepository()
-  const addSolutionToUserRepository: IAddSolutionToUserRepository = new AddSolutionToUserRepository()
   const addSolutionRepository: IAddSolutionRepository = new AddSolutionRepository()
 
   const addSolutionService: IAddSolutionUseCase = new AddSolutionService(
-    loadOneProblemAndUserService, addSolutionToProblemRepository,
-    addSolutionToUserRepository, addSolutionRepository
+    loadOneProblemAndUserService, addSolutionRepository
   )
 
   return addSolutionService

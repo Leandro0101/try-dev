@@ -1,11 +1,10 @@
-import { IAddSolutionUseCase } from '@domain/usecases'
 import { AddSolutionController } from '@presentation/controllers'
 import { IController } from '@presentation/protocols'
 import { makeAddSolutionService } from '../../services/solution/add-solution'
+import { makeValidationComposite } from './validation'
 
 export const makeAddSolutionController = (): IController => {
-  const addSolutionService: IAddSolutionUseCase = makeAddSolutionService()
-  const addSolutionController = new AddSolutionController(addSolutionService)
+  const addSolutionController = new AddSolutionController(makeAddSolutionService(), makeValidationComposite())
 
   return addSolutionController
 }
