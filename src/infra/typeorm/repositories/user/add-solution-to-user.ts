@@ -6,7 +6,7 @@ import { getCustomRepository } from 'typeorm'
 export class AddSolutionToUserRepository implements IAddSolutionToUserRepository {
   async execute (solution: ISolutionEntity, user: IUserEntity): Promise<void> {
     const baseRepository = getCustomRepository(BaseUserRepository)
-    user.solutions.push(solution)
+    user.solutions = [solution]
     await baseRepository.save(user)
   }
 }
