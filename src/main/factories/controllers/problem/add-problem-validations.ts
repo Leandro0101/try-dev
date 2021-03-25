@@ -1,7 +1,7 @@
 import { IValidation } from '@presentation/protocols'
 import { RequiredParamValidation, ValidationComposite } from '@validations/validators'
 
-export const makeValidationComposite = (): ValidationComposite => {
+export const makeAddProblemValidation = (): ValidationComposite => {
   const validations: IValidation[] = []
 
   for (const field of ['title', 'description', 'userId']) {
