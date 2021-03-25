@@ -3,7 +3,7 @@ import { UUIDValidation } from '@/src/validations/validators'
 import { IValidation } from '@presentation/protocols'
 import { RequiredParamValidation, ValidationComposite } from '@validations/validators'
 
-export const makeValidationComposite = (): ValidationComposite => {
+export const makeAddSolutionValidations = (): ValidationComposite => {
   const validations: IValidation[] = []
 
   for (const field of ['description', 'sourceCode']) {

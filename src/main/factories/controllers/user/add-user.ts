@@ -1,6 +1,6 @@
 import { AddUserController } from '@presentation/controllers'
 import { IController } from '@presentation/protocols'
-import { makeAddUserValidations } from './validations'
+import { makeAddUserValidations } from './add-user-validations'
 import { makeAddUserService } from '../../services'
 
 export const makeAddUserController = (): IController => {

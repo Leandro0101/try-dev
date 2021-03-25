@@ -1,10 +1,10 @@
 import { AddSolutionController } from '@presentation/controllers'
 import { IController } from '@presentation/protocols'
 import { makeAddSolutionService } from '../../services'
-import { makeValidationComposite } from './validation'
+import { makeAddSolutionValidations } from './add-solution-validations'
 
 export const makeAddSolutionController = (): IController => {
-  const addSolutionController = new AddSolutionController(makeAddSolutionService(), makeValidationComposite())
+  const addSolutionController = new AddSolutionController(makeAddSolutionService(), makeAddSolutionValidations())
 
   return addSolutionController
 }
