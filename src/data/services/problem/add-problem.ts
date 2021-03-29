@@ -2,6 +2,7 @@ import { ILoadUserByIdUseCase, IAddProblemUseCase, ICreateProblemModel } from '@
 
 import { IReturnProblemDTO } from '@data/dtos'
 import { IAddProblemRepository } from '../../repositories'
+import { userWithoutPassword } from '../utils/user-without-password'
 
 export class AddProblemService implements IAddProblemUseCase {
   constructor (private readonly addProblemRepository: IAddProblemRepository, private readonly loadUserByIdService: ILoadUserByIdUseCase) {}
@@ -15,6 +16,7 @@ export class AddProblemService implements IAddProblemUseCase {
     const { user, ...createdProblem } = await this.addProblemRepository.execute(
       { title, description, user: loadedUser }
     )
-    return { problem: createdProblem }
+
+    return { problem: createdProblem, user: userWithoutPassword(user) }
   }
 }
