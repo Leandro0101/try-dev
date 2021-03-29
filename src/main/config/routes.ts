@@ -3,6 +3,8 @@ import addUserRoute from '../routes/add-user'
 import addProblemRoute from '../routes/add-problem'
 import addSolutionRoute from '../routes/add-solution'
 import loadProblemByIdRoute from '../routes/load-problem-by-id'
+import loadSolutionByIdRoute from '../routes/load-solution-by-id'
+
 export default (app: Express): void => {
   const routes = Router()
   app.use('/api', routes)
@@ -10,4 +12,5 @@ export default (app: Express): void => {
   addProblemRoute(routes)
   addSolutionRoute(routes)
   loadProblemByIdRoute(routes)
+  loadSolutionByIdRoute(routes)
 }

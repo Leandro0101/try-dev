@@ -1,4 +1,4 @@
-import { IProblemEntity, ISolutionEntity } from '.'
+import { IProblemEntity, ISolutionEntity, IStarEntity } from '.'
 
 export enum IStatusUser {
   ACTIVE = 'active', INACTIVE = 'inactive',
@@ -11,6 +11,7 @@ export interface IUserEntity {
   password: string
   solutions: ISolutionEntity[]
   problems: IProblemEntity[]
+  stars: IStarEntity[]
   status: IStatusUser
   createdAt: Date
 }
