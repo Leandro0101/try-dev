@@ -1,4 +1,4 @@
-import { ISolutionEntity } from '../../entities/solution'
+import { IReturnSolutionDTO } from '@/src/data/dtos'
 export interface ILoadSolutionByIdUseCase {
-  execute: (id: string) => Promise<ISolutionEntity>
+  execute: (id: string) => Promise<IReturnSolutionDTO>
 }
