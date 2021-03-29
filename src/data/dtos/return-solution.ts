@@ -1,6 +1,7 @@
+import { ISolutionEntity } from '../../domain/entities/solution'
+import { IReturnUserDTO } from './return-user'
+
 export interface IReturnSolutionDTO {
-  id: string
-  sourceCode: string
-  description: string
-  createdAt: Date
+  solution: Omit<ISolutionEntity, 'user'>
+  user: IReturnUserDTO
 }

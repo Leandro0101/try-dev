@@ -1,6 +1,7 @@
 import { IAddSolutionUseCase, ICreateSolutionModel, ILoadOneProblemAndUserUseCase } from '@domain/usecases'
 import { IReturnSolutionDTO } from '../../dtos'
 import { IAddSolutionRepository } from '../../repositories'
+import { userWithoutPassword } from '../utils/user-without-password'
 
 export class AddSolutionService implements IAddSolutionUseCase {
   constructor (
@@ -9,12 +10,14 @@ export class AddSolutionService implements IAddSolutionUseCase {
 
   async execute (createSolutionData: ICreateSolutionModel): Promise<IReturnSolutionDTO> {
     const { userId, problemId, description, sourceCode } = createSolutionData
-    const { user, problem } = await this.loadOneProblemAndUserService.execute(userId, problemId)
+    const { user, problem } = await this.loadOneProblemAndUserService
+      .execute(userId, problemId)
 
     if (!user || !problem) return null
 
-    const solution = await this.addSolutionRepository.execute({ description, sourceCode, user, problem })
+    const { user: returnedUser, ...solution } = await this.addSolutionRepository
+      .execute({ description, sourceCode, user, problem })
 
-    return solution
+    return { solution, user: userWithoutPassword(returnedUser) }
   }
 }
