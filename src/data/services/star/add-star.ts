@@ -1,7 +1,7 @@
 import { IAddStarUseCase, ICreateStarModel } from '@domain/usecases'
 import { TReturnStarDTO } from '../../dtos'
 import { IAddStarRepository, ILoadSolutionByIdRepository } from '../../repositories'
-
+import { removeUserWithPassword } from './remove-user-with-password'
 export class AddStarService implements IAddStarUseCase {
   constructor (private readonly addStarRepository: IAddStarRepository,
     private readonly loadSolutionById: ILoadSolutionByIdRepository) {}
@@ -12,8 +12,11 @@ export class AddStarService implements IAddStarUseCase {
 
     if (!solution) return null
 
-    const star = await this.addStarRepository.execute({ value, solution })
+    const { solution: returnedSolution, ...star } = await this.addStarRepository
+      .execute({ value, solution })
 
-    return star
+    const starWithUserWithoutPassword = removeUserWithPassword(returnedSolution, star)
+
+    return starWithUserWithoutPassword
   }
 }

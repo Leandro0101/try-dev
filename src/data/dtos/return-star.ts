@@ -1,6 +1,5 @@
-import { IStarEntity } from '@domain/entities'
+import { IStarEntity, ISolutionEntity } from '@domain/entities'
 import { IReturnUserDTO } from '.'
 
-export type TReturnStarDTO = Omit<IStarEntity, 'user'> & {
-  user: IReturnUserDTO
-}
+export type TReturnStarDTO = Omit<IStarEntity, 'user' | 'solution'> & {
+  user: IReturnUserDTO } & { solution: Omit<ISolutionEntity, 'user'> }
