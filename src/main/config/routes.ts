@@ -4,6 +4,7 @@ import addProblemRoute from '../routes/add-problem'
 import addSolutionRoute from '../routes/add-solution'
 import loadProblemByIdRoute from '../routes/load-problem-by-id'
 import loadSolutionByIdRoute from '../routes/load-solution-by-id'
+import addStarRoute from '../routes/add-star'
 
 export default (app: Express): void => {
   const routes = Router()
@@ -13,4 +14,5 @@ export default (app: Express): void => {
   addSolutionRoute(routes)
   loadProblemByIdRoute(routes)
   loadSolutionByIdRoute(routes)
+  addStarRoute(routes)
 }
