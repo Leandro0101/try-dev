@@ -8,6 +8,8 @@ export class LoadUserByIdService implements ILoadUserByIdUseCase {
   async execute (userId: string): Promise<IUserEntity> {
     const foundUser = await this.loadUserByIdRepository.execute(userId)
 
+    if (!foundUser) return null
+
     return foundUser
   }
 }
