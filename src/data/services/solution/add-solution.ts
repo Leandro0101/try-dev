@@ -1,23 +1,34 @@
-import { IAddSolutionUseCase, ICreateSolutionModel, ILoadOneProblemAndUserUseCase } from '@domain/usecases'
-import { IReturnSolutionDTO } from '../../dtos'
-import { IAddSolutionRepository } from '../../repositories'
+import { IAddSolutionUseCase, ICreateSolutionModel } from '@domain/usecases'
+import { TReturnSolutionDTO } from '../../dtos'
+import {
+  IAddSolutionRepository, ILoadProblemByIdRepository,
+  ILoadUserByIdRepository
+} from '../../repositories'
+
 import { userWithoutPassword } from '../utils/user-without-password'
 
 export class AddSolutionService implements IAddSolutionUseCase {
   constructor (
-    private readonly loadOneProblemAndUserService: ILoadOneProblemAndUserUseCase,
+    private readonly loadUserByIdRepository: ILoadUserByIdRepository,
+    private readonly loadProblemByIdRepository: ILoadProblemByIdRepository,
     private readonly addSolutionRepository: IAddSolutionRepository) {}
 
-  async execute (createSolutionData: ICreateSolutionModel): Promise<IReturnSolutionDTO> {
+  async execute (createSolutionData: ICreateSolutionModel): Promise<TReturnSolutionDTO> {
     const { userId, problemId, description, sourceCode } = createSolutionData
-    const { user, problem } = await this.loadOneProblemAndUserService
-      .execute(userId, problemId)
+    const user = await this.loadUserByIdRepository.execute(userId)
+    const problem = await this.loadProblemByIdRepository.execute(problemId)
 
     if (!user || !problem) return null
 
-    const { user: returnedUser, ...solution } = await this.addSolutionRepository
+    const { user: returnedUser, ...solution } = await this
+      .addSolutionRepository
       .execute({ description, sourceCode, user, problem })
 
-    return { solution, user: userWithoutPassword(returnedUser) }
+    const newSolution = Object.assign(solution,
+      {
+        user: userWithoutPassword(returnedUser)
+      })
+
+    return newSolution
   }
 }

@@ -1,4 +1,4 @@
-import { ICreateProblemDTO, IReturnProblemDTO } from '../../../data/dtos'
+import { ICreateProblemDTO, TReturnProblemDTO } from '../../../data/dtos'
 
 export interface ICreateProblemModel {
   fields: Omit<ICreateProblemDTO, 'user'>
@@ -6,5 +6,5 @@ export interface ICreateProblemModel {
 }
 
 export interface IAddProblemUseCase {
-  execute: (createProblemData: ICreateProblemModel) => Promise<IReturnProblemDTO>
+  execute: (createProblemData: ICreateProblemModel) => Promise<TReturnProblemDTO>
 }
