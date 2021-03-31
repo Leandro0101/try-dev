@@ -1,18 +1,18 @@
 import {
-  ILoadUserByIdUseCase, IAddProblemUseCase,
+  IAddProblemUseCase,
   ICreateProblemModel
 } from '@domain/usecases'
 
 import { TReturnProblemDTO } from '@data/dtos'
-import { IAddProblemRepository } from '../../repositories'
+import { IAddProblemRepository, ILoadUserByIdRepository } from '../../repositories'
 
 export class AddProblemService implements IAddProblemUseCase {
   constructor (
     private readonly addProblemRepository: IAddProblemRepository,
-    private readonly loadUserByIdService: ILoadUserByIdUseCase) {}
+    private readonly loadUserByIdRepository: ILoadUserByIdRepository) {}
 
   async execute (problemData: ICreateProblemModel): Promise<TReturnProblemDTO> {
-    const loadedUser = await this.loadUserByIdService.execute(problemData.userId)
+    const loadedUser = await this.loadUserByIdRepository.execute(problemData.userId)
     const { title, description } = problemData.fields
 
     if (!loadedUser) return null
