@@ -11,10 +11,10 @@ export class StarModel implements IStarEntity {
   @Column()
   value: number
 
-  @ManyToOne(() => UserModel, stars => StarModel)
+  @ManyToOne(type => UserModel, user => user.stars)
   user: UserModel
 
-  @ManyToOne(() => SolutionModel, stars => StarModel)
+  @ManyToOne(type => SolutionModel, solution => solution.stars)
   solution: SolutionModel
 
   @CreateDateColumn()

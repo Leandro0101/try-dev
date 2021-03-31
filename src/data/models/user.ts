@@ -17,16 +17,16 @@ export class UserModel implements IUserEntity {
   @Column()
   password: string
 
-  @OneToMany(() => SolutionModel, user => UserModel)
+  @OneToMany(type => SolutionModel, solution => solution.user)
   solutions: SolutionModel[]
 
-  @OneToMany(() => ProblemModel, user => UserModel)
+  @OneToMany(type => ProblemModel, problem => problem.user)
   problems: ProblemModel[]
 
   @Column({ type: 'enum', enum: IStatusUser })
   status: IStatusUser
 
-  @OneToMany(() => StarModel, user => UserModel)
+  @OneToMany(type => StarModel, star => star.user)
   stars: StarModel[]
 
   @CreateDateColumn()

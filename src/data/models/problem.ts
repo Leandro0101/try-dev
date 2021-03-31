@@ -14,10 +14,10 @@ export class ProblemModel implements IProblemEntity {
   @Column()
   description: string
 
-  @ManyToOne(() => UserModel, problems => ProblemModel)
+  @ManyToOne(type => UserModel, user => user.problems)
   user: UserModel
 
-  @OneToMany(() => SolutionModel, problem => ProblemModel)
+  @OneToMany(type => SolutionModel, solution => solution.problem)
   solutions: SolutionModel[]
 
   @Column({ type: 'enum', enum: IStatusProblem })

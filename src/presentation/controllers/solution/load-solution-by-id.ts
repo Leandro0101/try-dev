@@ -1,5 +1,6 @@
 import { ILoadSolutionByIdUseCase } from '@domain/usecases'
-import { badRequest, ok } from '../../helpers/http'
+import { ResourceNotFoundError } from '../../errors'
+import { badRequest, forbidden, ok } from '../../helpers/http'
 import { IController, IHttpRequest, IHttpResponse } from '../../protocols'
 import { IValidation } from '../../protocols/validation'
 
@@ -13,6 +14,8 @@ export class LoadSolutionByIdController implements IController {
     if (error) return badRequest(error)
 
     const solution = await this.loadSolutionByIdService.execute(httpRequest.params.id)
+
+    if (!solution) return forbidden(new ResourceNotFoundError('solution'))
 
     return ok(solution)
   }

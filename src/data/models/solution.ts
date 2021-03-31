@@ -17,13 +17,13 @@ export class SolutionModel implements ISolutionEntity {
   @Column()
   description: string
 
-  @ManyToOne(() => UserModel, solutions => SolutionModel)
+  @ManyToOne(type => UserModel, user => user.solutions)
   user: UserModel
 
-  @ManyToOne(() => ProblemModel, solutions => SolutionModel)
+  @ManyToOne(type => ProblemModel, problem => problem.solutions)
   problem: ProblemModel
 
-  @OneToMany(() => StarModel, solution => SolutionModel)
+  @OneToMany(type => StarModel, star => star.solution)
   stars: StarModel[]
 
   @CreateDateColumn()
