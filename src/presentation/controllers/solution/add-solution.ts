@@ -16,7 +16,7 @@ export class AddSolutionController implements IController {
 
     const solution = await this.addSolutionService.execute({ userId, problemId, description, sourceCode })
 
-    if (!solution) return forbidden(new ResourceNotFoundError('problem'))
+    if (!solution) return forbidden(new ResourceNotFoundError('problem or user'))
 
     return ok(solution)
   }

@@ -5,8 +5,6 @@ import {
   ILoadUserByIdRepository
 } from '../../repositories'
 
-import { userWithoutPassword } from '../utils/user-without-password'
-
 export class AddSolutionService implements IAddSolutionUseCase {
   constructor (
     private readonly loadUserByIdRepository: ILoadUserByIdRepository,
@@ -20,15 +18,10 @@ export class AddSolutionService implements IAddSolutionUseCase {
 
     if (!user || !problem) return null
 
-    const { user: returnedUser, ...solution } = await this
+    const { user: returnedUser, stars, problem: returnedProblem, ...solution } = await this
       .addSolutionRepository
       .execute({ description, sourceCode, user, problem })
 
-    const newSolution = Object.assign(solution,
-      {
-        user: userWithoutPassword(returnedUser)
-      })
-
-    return newSolution
+    return solution
   }
 }

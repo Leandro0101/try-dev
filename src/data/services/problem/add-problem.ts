@@ -1,8 +1,10 @@
-import { ILoadUserByIdUseCase, IAddProblemUseCase, ICreateProblemModel } from '@domain/usecases'
+import {
+  ILoadUserByIdUseCase, IAddProblemUseCase,
+  ICreateProblemModel
+} from '@domain/usecases'
 
 import { TReturnProblemDTO } from '@data/dtos'
 import { IAddProblemRepository } from '../../repositories'
-import { userWithoutPassword } from '../utils/user-without-password'
 
 export class AddProblemService implements IAddProblemUseCase {
   constructor (
@@ -15,14 +17,10 @@ export class AddProblemService implements IAddProblemUseCase {
 
     if (!loadedUser) return null
 
-    const { user, ...createdProblem } = await this.addProblemRepository.execute(
+    const { solutions, user, ...problem } = await this.addProblemRepository.execute(
       { title, description, user: loadedUser }
     )
 
-    const newProblem = Object.assign(createdProblem, {
-      user: userWithoutPassword(user)
-    })
-
-    return newProblem
+    return problem
   }
 }
