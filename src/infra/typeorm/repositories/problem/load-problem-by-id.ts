@@ -9,11 +9,11 @@ export class LoadProblemByIdRepository implements ILoadProblemByIdRepository {
     const baseProblemRepository = getCustomRepository(BaseProblemRepository)
     const baseSolutionRepository = getCustomRepository(BaseSolutionRepository)
 
-    const problem = await baseProblemRepository.find({ where: { id }, relations: ['user'] })
+    const problem = await baseProblemRepository.findOne({ where: { id }, relations: ['user'] })
     const solutions = await baseSolutionRepository.find({ where: { problem: id }, take: 15 })
 
-    problem[0].solutions = solutions
+    problem.solutions = solutions
 
-    return problem[0]
+    return problem
   }
 }

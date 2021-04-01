@@ -6,10 +6,10 @@ import { BaseSolutionRepository } from '../base-solution-repository'
 export class LoadSolutionByIdRepository implements ILoadSolutionByIdRepository {
   async execute (id: string): Promise<ISolutionEntity> {
     const baseRepository = getCustomRepository(BaseSolutionRepository)
-    const solution = await baseRepository.find(
+    const solution = await baseRepository.findOne(
       { where: { id }, relations: ['user', 'problem'] }
     )
 
-    return solution[0]
+    return solution
   }
 }
