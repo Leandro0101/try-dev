@@ -13,11 +13,14 @@ export class LoadUserByIdRepository implements ILoadUserByIdRepository {
     const baseProblemRepository = getCustomRepository(BaseProblemRepository)
     const baseStarRepository = getCustomRepository(BaseStarRepository)
 
-    const TAKE = 15
+    const take = 15
     const foundUser = await baseUserRepository.findOne(id)
-    const stars = await baseStarRepository.find({ where: { user: id }, take: TAKE })
-    const problems = await baseProblemRepository.find({ where: { user: id }, take: TAKE })
-    const solutions = await baseSolutionRepository.find({ where: { user: id }, take: TAKE })
+
+    if (!foundUser) return null
+
+    const stars = await baseStarRepository.find({ where: { user: id }, take })
+    const problems = await baseProblemRepository.find({ where: { user: id }, take })
+    const solutions = await baseSolutionRepository.find({ where: { user: id }, take })
 
     foundUser.solutions = solutions
     foundUser.problems = problems

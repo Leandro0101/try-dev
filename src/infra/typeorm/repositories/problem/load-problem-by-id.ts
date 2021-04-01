@@ -10,6 +10,9 @@ export class LoadProblemByIdRepository implements ILoadProblemByIdRepository {
     const baseSolutionRepository = getCustomRepository(BaseSolutionRepository)
 
     const problem = await baseProblemRepository.findOne({ where: { id }, relations: ['user'] })
+
+    if (!problem) return null
+
     const solutions = await baseSolutionRepository.find({ where: { problem: id }, take: 15 })
 
     problem.solutions = solutions
