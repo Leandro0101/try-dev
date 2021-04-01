@@ -1,11 +1,9 @@
+import { ValidationComposite } from '@/src/validations/validators'
 import { IValidation } from '@presentation/protocols'
-import { UUIDValidation, ValidationComposite } from '@validations/validators'
-import { UUIDValidatorAdapter } from '@infra/validators'
+import { makeUUIDValidation } from '.'
 
 export const makeLoadSolutionByIdValidation = (): ValidationComposite => {
-  const validations: IValidation[] = []
-
-  validations.push(new UUIDValidation('id', new UUIDValidatorAdapter()))
+  const validations: IValidation[] = [makeUUIDValidation('id')]
 
   return new ValidationComposite(validations)
 }

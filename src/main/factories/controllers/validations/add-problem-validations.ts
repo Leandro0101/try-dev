@@ -1,9 +1,9 @@
-import { UUIDValidatorAdapter } from '@infra/validators'
 import { IValidation } from '@presentation/protocols'
 import {
-  RequiredParamValidation, UUIDValidation,
+  RequiredParamValidation,
   ValidationComposite
 } from '@validations/validators'
+import { makeUUIDValidation } from '.'
 
 export const makeAddProblemValidation = (): ValidationComposite => {
   const validations: IValidation[] = []
@@ -12,7 +12,7 @@ export const makeAddProblemValidation = (): ValidationComposite => {
     validations.push(new RequiredParamValidation(field))
   }
 
-  validations.push(new UUIDValidation('userId', new UUIDValidatorAdapter()))
+  validations.push(makeUUIDValidation('userId'))
 
   return new ValidationComposite(validations)
 }
