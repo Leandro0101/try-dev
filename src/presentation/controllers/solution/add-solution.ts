@@ -1,6 +1,6 @@
 import { IAddSolutionUseCase } from '@domain/usecases'
 import { ResourceNotFoundError } from '../../errors'
-import { badRequest, forbidden, ok } from '../../helpers/http'
+import { badRequest, forbidden, ok, serverError } from '../../helpers/http'
 import { IController, IHttpRequest, IHttpResponse, IValidation } from '../../protocols'
 
 export class AddSolutionController implements IController {
@@ -8,16 +8,20 @@ export class AddSolutionController implements IController {
     private readonly validation: IValidation) {}
 
   async handle (httpRequest: IHttpRequest): Promise<IHttpResponse> {
-    const { userId, problemId } = httpRequest.params
-    const { sourceCode, description } = httpRequest.body
-    const error = this.validation.validate({ userId, problemId, description, sourceCode })
+    try {
+      const { userId, problemId } = httpRequest.params
+      const { sourceCode, description } = httpRequest.body
+      const error = this.validation.validate({ userId, problemId, description, sourceCode })
 
-    if (error) return badRequest(error)
+      if (error) return badRequest(error)
 
-    const solution = await this.addSolutionService.execute({ userId, problemId, description, sourceCode })
+      const solution = await this.addSolutionService.execute({ userId, problemId, description, sourceCode })
 
-    if (!solution) return forbidden(new ResourceNotFoundError('problem or user'))
+      if (!solution) return forbidden(new ResourceNotFoundError('problem or user'))
 
-    return ok(solution)
+      return ok(solution)
+    } catch (error) {
+      return serverError(error)
+    }
   }
 }

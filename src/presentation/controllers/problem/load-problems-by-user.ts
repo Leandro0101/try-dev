@@ -1,5 +1,5 @@
 import { ILoadProblemsByUserUseCase } from '@domain/usecases'
-import { badRequest, ok } from '../../helpers/http'
+import { badRequest, ok, serverError } from '../../helpers/http'
 import { IHttpRequest, IHttpResponse } from '../../protocols'
 import { IController } from '../../protocols/controller'
 import { IValidation } from '../../protocols/validation'
@@ -11,14 +11,18 @@ export class LoadProblemsByUserController implements IController {
   ) {}
 
   async handle (httpRequest: IHttpRequest): Promise<IHttpResponse> {
-    const { userId, page } = httpRequest.params
+    try {
+      const { userId, page } = httpRequest.params
 
-    const error = this.validation.validate({ userId })
+      const error = this.validation.validate({ userId })
 
-    if (error) return badRequest(error)
+      if (error) return badRequest(error)
 
-    const problems = await this.loadProblemsByUserService.execute(userId, Number(page))
+      const problems = await this.loadProblemsByUserService.execute(userId, Number(page))
 
-    return ok(problems)
+      return ok(problems)
+    } catch (error) {
+      return serverError(error)
+    }
   }
 }
