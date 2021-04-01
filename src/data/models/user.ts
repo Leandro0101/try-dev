@@ -14,7 +14,7 @@ export class UserModel implements IUserEntity {
   @Column()
   email: string
 
-  @Column()
+  @Column({ select: false })
   password: string
 
   @OneToMany(type => SolutionModel, solution => solution.user)
