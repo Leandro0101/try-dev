@@ -1,8 +1,7 @@
 import { ILoadSolutionByIdUseCase } from '@domain/usecases'
 import { ResourceNotFoundError } from '../../errors'
 import { badRequest, forbidden, ok, serverError } from '../../helpers/http'
-import { IController, IHttpRequest, IHttpResponse } from '../../protocols'
-import { IValidation } from '../../protocols/validation'
+import { IController, IHttpRequest, IHttpResponse, IValidation } from '../../protocols'
 
 export class LoadSolutionByIdController implements IController {
   constructor (private readonly loadSolutionByIdService: ILoadSolutionByIdUseCase,

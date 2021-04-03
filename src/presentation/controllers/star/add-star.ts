@@ -1,8 +1,7 @@
 import { IAddStarUseCase } from '@domain/usecases'
 import { ResourceNotFoundError } from '../../errors'
 import { badRequest, forbidden, ok, serverError } from '../../helpers/http'
-import { IController, IHttpRequest, IHttpResponse } from '../../protocols'
-import { IValidation } from '../../protocols/validation'
+import { IController, IHttpRequest, IHttpResponse, IValidation } from '../../protocols'
 
 export class AddStarController implements IController {
   constructor (

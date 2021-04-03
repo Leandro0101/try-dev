@@ -1,8 +1,6 @@
 import { ILoadProblemsByUserUseCase } from '@domain/usecases'
 import { badRequest, ok, serverError } from '../../helpers/http'
-import { IHttpRequest, IHttpResponse } from '../../protocols'
-import { IController } from '../../protocols/controller'
-import { IValidation } from '../../protocols/validation'
+import { IHttpRequest, IHttpResponse, IValidation, IController } from '../../protocols'
 
 export class LoadProblemsByUserController implements IController {
   constructor (

@@ -1,7 +1,7 @@
 import { IAddUserUseCase } from '@domain/usecases'
 import { badRequest, forbidden, ok, serverError } from '../../helpers/http'
 import { IController, IHttpRequest, IHttpResponse, IValidation } from '../../protocols'
-import { EmailAlreadyRegisterError } from '../../errors/email-already-register'
+import { EmailAlreadyRegisterError } from '../../errors'
 
 export class AddUserController implements IController {
   constructor (private readonly addUserService: IAddUserUseCase, private readonly validation: IValidation) {}

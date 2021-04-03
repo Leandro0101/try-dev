@@ -1,5 +1,5 @@
 import { IAddProblemUseCase } from '@domain/usecases/problem/add-problem'
-import { ResourceNotFoundError } from '../../errors/resource-not-found'
+import { ResourceNotFoundError } from '../../errors'
 import { badRequest, forbidden, ok, serverError } from '../../helpers/http'
 import { IController, IHttpRequest, IHttpResponse, IValidation } from '../../protocols'
 
