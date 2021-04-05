@@ -7,7 +7,6 @@ export class MarkProblemAsResolvedRepository implements IMarkProblemAsResolvedRe
   async execute (problem: IProblemEntity): Promise<void> {
     const baseRepository = getCustomRepository(BaseProblemRepository)
     problem.status = IStatusProblem.RESOLVED
-    console.log(problem.status)
     await baseRepository.save(problem)
   }
 }
