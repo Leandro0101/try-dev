@@ -14,6 +14,7 @@ export class AddTypeEnumStatusAtProblems1617655617281 implements MigrationInterf
 
   public async down (queryRunner: QueryRunner): Promise<void> {
     await queryRunner.dropColumn('problems', 'status')
+    await queryRunner.query('DROP statusProblem box')
     await queryRunner.addColumns('problems', [new TableColumn({
       name: 'status',
       type: 'enum',

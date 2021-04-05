@@ -18,7 +18,7 @@ export class CreateStar1616704500702 implements MigrationInterface {
             referencedTableName: 'users',
             referencedColumnNames: ['id'],
             columnNames: ['userId'],
-            onDelete: 'RESTRICT',
+            onDelete: 'CASCADE',
             onUpdate: 'CASCADE'
           },
           {
@@ -26,7 +26,7 @@ export class CreateStar1616704500702 implements MigrationInterface {
             referencedTableName: 'solutions',
             referencedColumnNames: ['id'],
             columnNames: ['solutionId'],
-            onDelete: 'RESTRICT',
+            onDelete: 'CASCADE',
             onUpdate: 'CASCADE'
           }
         ]

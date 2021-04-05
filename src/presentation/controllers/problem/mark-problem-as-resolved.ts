@@ -10,20 +10,20 @@ export class MarkProblemAsResolvedController implements IController {
   ) {}
 
   async handle (httpRequest: IHttpRequest): Promise<IHttpResponse> {
-    // try {
-    const { problemId } = httpRequest.params
+    try {
+      const { problemId } = httpRequest.params
 
-    const error = this.validation.validate({ problemId })
+      const error = this.validation.validate({ problemId })
 
-    if (error) return badRequest(error)
+      if (error) return badRequest(error)
 
-    const response = await this.markProblemAsResolvedService.execute(problemId)
+      const response = await this.markProblemAsResolvedService.execute(problemId)
 
-    if (response === null) return forbidden(new ResourceNotFoundError('problem'))
+      if (response === null) return forbidden(new ResourceNotFoundError('problem'))
 
-    return ok()
-    // } catch (error) {
-    //   return serverError(error)
-    // }
+      return ok()
+    } catch (error) {
+      return serverError(error)
+    }
   }
 }
