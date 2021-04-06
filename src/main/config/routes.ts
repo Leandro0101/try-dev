@@ -9,6 +9,7 @@ import loadUserByIdRoute from '../routes/load-user-by-id'
 import loadProblemsByUserRoute from '../routes/load-problems-by-user'
 import markProblemAsResolvedRoute from '../routes/mark-problem-as-resolved'
 import removeProblemRoute from '../routes/remove-solution'
+import editSolutionRoute from '../routes/edit-solution'
 
 export default (app: Express): void => {
   const routes = Router()
@@ -23,4 +24,5 @@ export default (app: Express): void => {
   loadProblemsByUserRoute(routes)
   markProblemAsResolvedRoute(routes)
   removeProblemRoute(routes)
+  editSolutionRoute(routes)
 }
