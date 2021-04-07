@@ -1,3 +1,5 @@
+import { AddLogErrorRepository } from '@infra/typeorm/repositories'
+import { LogControllerDecorator } from '../../../decorators/log'
 import { AddProblemController } from '@presentation/controllers'
 import { IController } from '@presentation/protocols'
 import { makeAddProblemService } from '../../services/'
@@ -7,5 +9,5 @@ export const makeAddProblemController = (): IController => {
   const addProblemController: IController = new AddProblemController(
     makeAddProblemService(), makeAddProblemValidation())
 
-  return addProblemController
+  return new LogControllerDecorator(addProblemController, new AddLogErrorRepository())
 }

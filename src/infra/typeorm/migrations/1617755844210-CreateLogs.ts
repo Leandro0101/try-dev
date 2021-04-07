@@ -7,7 +7,7 @@ export class CreateLogs1617755844210 implements MigrationInterface {
         name: 'logs',
         columns: [
           { name: 'id', type: 'uuid', isPrimary: true },
-          { name: 'stack', type: 'uuid' },
+          { name: 'stack', type: 'varchar' },
           { name: 'createdAt', type: 'timestamp', default: 'now()' }
         ]
       })
