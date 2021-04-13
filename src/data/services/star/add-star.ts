@@ -1,21 +1,41 @@
 import { IAddStarUseCase, ICreateStarModel } from '@domain/usecases'
 import { TReturnStarDTO } from '../../dtos'
-import { IAddStarRepository, ILoadSolutionByIdRepository } from '../../repositories'
+import { IFailValidations, IUseCasesReturn } from '../../protocols/use-case-return'
+import {
+  IAddStarRepository,
+  ILoadSolutionByIdRepository,
+  ILoadStarsFromUserRepository,
+  ILoadUserByIdRepository
+} from '../../repositories'
 
 export class AddStarService implements IAddStarUseCase {
   constructor (
-    private readonly addStarRepository: IAddStarRepository,
-    private readonly loadSolutionById: ILoadSolutionByIdRepository) {}
+    private readonly addStar: IAddStarRepository,
+    private readonly loadSolutionById: ILoadSolutionByIdRepository,
+    private readonly loadUserById: ILoadUserByIdRepository,
+    private readonly loadStarFromUser: ILoadStarsFromUserRepository) {}
 
-  async execute (createStarData: ICreateStarModel): Promise<TReturnStarDTO> {
-    const { solutionId, value } = createStarData
+  async execute (createStarData: ICreateStarModel): Promise<IUseCasesReturn<TReturnStarDTO>> {
+    const { solutionId, value, userId } = createStarData
     const solution = await this.loadSolutionById.execute(solutionId)
+    const user = await this.loadUserById.execute(userId)
+    const failValidations: IFailValidations = {}
 
-    if (!solution) return null
+    if (!solution || !user) {
+      failValidations.userOrSolutionNonexistent = true
+      return { failValidations }
+    }
 
-    const { solution: returnedSolution, user, ...star } = await this.addStarRepository
-      .execute({ value, solution })
+    const existentStar = await this.loadStarFromUser.execute(userId, solutionId)
 
-    return star
+    if (existentStar) {
+      failValidations.userAlreadyGivedStar = true
+      return { failValidations }
+    }
+
+    const { solution: returnedSolution, user: returnedUser, ...star } =
+      await this.addStar.execute({ value, solution, user })
+
+    return { content: star }
   }
 }

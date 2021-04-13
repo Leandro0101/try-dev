@@ -1,5 +1,5 @@
 import { IAddStarUseCase } from '@domain/usecases'
-import { ResourceNotFoundError } from '../../errors'
+import { AlreadyGivenStarError, ResourceNotFoundError } from '../../errors'
 import { badRequest, forbidden, ok, serverError } from '../../helpers/http'
 import { IController, IHttpRequest, IHttpResponse, IValidation } from '../../protocols'
 
@@ -11,16 +11,24 @@ export class AddStarController implements IController {
   async handle (httpRequest: IHttpRequest): Promise<IHttpResponse> {
     try {
       const { value } = httpRequest.query
-      const { solutionId } = httpRequest.params
+      const { solutionId, userId } = httpRequest.params
       const error = this.validation.validate({ value, solutionId })
 
       if (error) return badRequest(error)
 
-      const star = await this.addStarService.execute({ solutionId, value })
+      const { content, failValidations } = await this.addStarService.execute({
+        userId, solutionId, value
+      })
 
-      if (!star) return forbidden(new ResourceNotFoundError('solution'))
+      if (failValidations) {
+        if (failValidations.userOrSolutionNonexistent) {
+          return forbidden(new ResourceNotFoundError('solution ou user'))
+        }
 
-      return ok(star)
+        if (failValidations.userAlreadyGivedStar) return forbidden(new AlreadyGivenStarError())
+      }
+
+      return ok(content)
     } catch (error) {
       return serverError(error)
     }

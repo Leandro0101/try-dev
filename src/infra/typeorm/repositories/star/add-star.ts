@@ -8,8 +8,7 @@ import { StarModel } from '@data/models'
 
 export class AddStarRepository implements IAddStarRepository {
   async execute (createStarData: ICreateStarDTO): Promise<IStarEntity> {
-    const { solution, value } = createStarData
-    const { user } = solution
+    const { solution, value, user } = createStarData
     const baseRepository = getCustomRepository(BaseStarRepository)
     const star: IStarEntity = new StarModel({ value, solution, user })
 
