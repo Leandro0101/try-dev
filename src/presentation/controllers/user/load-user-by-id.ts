@@ -11,14 +11,14 @@ export class LoadUserByIdController implements IController {
   async handle (httpRequest: IHttpRequest): Promise<IHttpResponse> {
     try {
       const error = this.validation.validate(httpRequest.params)
-
       if (error) return badRequest(error)
 
-      const user = await this.loadUserByIdService.execute(httpRequest.params.id)
+      const response = await this.loadUserByIdService.execute(httpRequest.params.id)
+      const { content, failValidations: fail } = response
 
-      if (!user) return forbidden(new ResourceNotFoundError('user'))
+      if (fail) return forbidden(new ResourceNotFoundError('user'))
 
-      return ok(user)
+      return ok(content)
     } catch (error) {
       return serverError(error)
     }

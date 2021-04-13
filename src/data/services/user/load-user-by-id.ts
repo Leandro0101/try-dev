@@ -1,15 +1,20 @@
-import { IUserEntity } from '@domain/entities'
-import { ILoadUserByIdUseCase } from '@domain/usecases'
+import { IFailValidations, IUseCasesReturn } from '../../protocols'
 import { ILoadUserByIdRepository } from '../../repositories'
+import { ILoadUserByIdUseCase } from '@domain/usecases'
+import { IUserEntity } from '@domain/entities'
 
 export class LoadUserByIdService implements ILoadUserByIdUseCase {
   constructor (private readonly loadUserByIdRepository: ILoadUserByIdRepository) {}
 
-  async execute (userId: string): Promise<IUserEntity> {
+  async execute (userId: string): Promise<IUseCasesReturn<IUserEntity>> {
     const user = await this.loadUserByIdRepository.execute(userId)
 
-    if (!user) return null
+    const failValidations: IFailValidations = {}
+    if (!user) {
+      failValidations.userNotFound = true
+      return { failValidations }
+    }
 
-    return user
+    return { content: user }
   }
 }
