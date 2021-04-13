@@ -1,3 +1,4 @@
+import { IUseCasesReturn } from '@data/protocols'
 import { ISolutionEntity } from '../../entities'
 
 export interface IEditSolutionModel {
@@ -7,5 +8,5 @@ export interface IEditSolutionModel {
 }
 
 export interface IEditSolutionUseCase {
-  execute: (editSolutionData: IEditSolutionModel) => Promise<ISolutionEntity>
+  execute: (editSolutionData: IEditSolutionModel) => Promise<IUseCasesReturn<ISolutionEntity>>
 }

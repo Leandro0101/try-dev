@@ -1,6 +1,7 @@
-import { ISolutionEntity } from '@domain/entities'
-import { IEditSolutionModel, IEditSolutionUseCase } from '@domain/usecases'
 import { IEditSolutionRepository, ILoadSolutionByIdRepository } from '../../repositories'
+import { IEditSolutionModel, IEditSolutionUseCase } from '@domain/usecases'
+import { IFailValidations, IUseCasesReturn } from '../../protocols'
+import { ISolutionEntity } from '@domain/entities'
 
 export class EditSolutionService implements IEditSolutionUseCase {
   constructor (
@@ -8,16 +9,19 @@ export class EditSolutionService implements IEditSolutionUseCase {
     private readonly loadSolutionByIdRepository: ILoadSolutionByIdRepository
   ) {}
 
-  async execute (editSolutionData: IEditSolutionModel): Promise<ISolutionEntity> {
+  async execute (editSolutionData: IEditSolutionModel): Promise<IUseCasesReturn<ISolutionEntity>> {
     const { solutionId, description, sourceCode } = editSolutionData
     let solution = await this.loadSolutionByIdRepository.execute(solutionId)
 
-    if (!solution) return null
+    const failValidations: IFailValidations = {}
+    if (!solution) {
+      failValidations.solutionNotFound = true
+      return { failValidations }
+    }
 
     solution = Object.assign(solution, { description, sourceCode })
-
     const updatedSolution = await this.editSolutionRepository.execute(solution)
 
-    return updatedSolution
+    return { content: updatedSolution }
   }
 }
