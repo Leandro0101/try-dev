@@ -1,9 +1,11 @@
 import { IAddSolutionUseCase, ICreateSolutionModel } from '@domain/usecases'
-import { TReturnSolutionDTO } from '../../dtos'
+import { IFailValidations, IUseCasesReturn } from '../../protocols'
 import {
   IAddSolutionRepository, ILoadProblemByIdRepository,
   ILoadUserByIdRepository
 } from '../../repositories'
+
+import { TReturnSolutionDTO } from '../../dtos'
 
 export class AddSolutionService implements IAddSolutionUseCase {
   constructor (
@@ -11,17 +13,22 @@ export class AddSolutionService implements IAddSolutionUseCase {
     private readonly loadProblemByIdRepository: ILoadProblemByIdRepository,
     private readonly addSolutionRepository: IAddSolutionRepository) {}
 
-  async execute (createSolutionData: ICreateSolutionModel): Promise<TReturnSolutionDTO> {
+  async execute (createSolutionData: ICreateSolutionModel): Promise<IUseCasesReturn<TReturnSolutionDTO>> {
     const { userId, problemId, description, sourceCode } = createSolutionData
     const user = await this.loadUserByIdRepository.execute(userId)
     const problem = await this.loadProblemByIdRepository.execute(problemId)
 
-    if (!user || !problem) return null
+    const failValidations: IFailValidations = {}
+    if (!user || !problem) {
+      failValidations.userOrProblemNonexistent = true
+      return { failValidations }
+    }
 
-    const { user: returnedUser, stars, problem: returnedProblem, ...solution } = await this
-      .addSolutionRepository
-      .execute({ description, sourceCode, user, problem })
+    const response = await this.addSolutionRepository.execute({
+      description, sourceCode, user, problem
+    })
 
-    return solution
+    const { user: u, stars, problem: p, ...solution } = response
+    return { content: solution }
   }
 }

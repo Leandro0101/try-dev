@@ -1,3 +1,4 @@
+import { IUseCasesReturn } from '@data/protocols'
 import { TReturnSolutionDTO } from '@data/dtos'
 export interface ICreateSolutionModel {
   userId: string
@@ -7,5 +8,5 @@ export interface ICreateSolutionModel {
 }
 
 export interface IAddSolutionUseCase {
-  execute: (createSolutionData: ICreateSolutionModel) => Promise<TReturnSolutionDTO>
+  execute: (createSolutionData: ICreateSolutionModel) => Promise<IUseCasesReturn<TReturnSolutionDTO>>
 }
