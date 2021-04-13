@@ -4,7 +4,7 @@ import { IFailValidations, IUseCasesReturn } from '../../protocols/use-case-retu
 import {
   IAddStarRepository,
   ILoadSolutionByIdRepository,
-  ILoadStarsFromUserRepository,
+  ILoadStarFromUserRepository,
   ILoadUserByIdRepository
 } from '../../repositories'
 
@@ -13,7 +13,7 @@ export class AddStarService implements IAddStarUseCase {
     private readonly addStar: IAddStarRepository,
     private readonly loadSolutionById: ILoadSolutionByIdRepository,
     private readonly loadUserById: ILoadUserByIdRepository,
-    private readonly loadStarFromUser: ILoadStarsFromUserRepository) {}
+    private readonly loadStarFromUser: ILoadStarFromUserRepository) {}
 
   async execute (createStarData: ICreateStarModel): Promise<IUseCasesReturn<TReturnStarDTO>> {
     const { solutionId, value, userId } = createStarData
