@@ -17,9 +17,7 @@ export class AddProblemController implements IController {
         .execute({ fields: httpRequest.body, userId })
 
       const { content, failValidations: fail } = response
-      if (fail) {
-        if (fail.userNotFound) return forbidden(new ResourceNotFoundError('user'))
-      }
+      if (fail) return forbidden(new ResourceNotFoundError('user'))
 
       return ok(content)
     } catch (error) {

@@ -18,9 +18,7 @@ export class LoadProblemByIdController implements IController {
       const response = await this.loadProblemByIdService.execute(id)
       const { content, failValidations: fail } = response
 
-      if (fail) {
-        if (fail.problemNotFound) return forbidden(new ResourceNotFoundError('problem'))
-      }
+      if (fail) return forbidden(new ResourceNotFoundError('problem'))
 
       return ok(content)
     } catch (error) {
