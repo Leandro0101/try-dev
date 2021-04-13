@@ -1,14 +1,18 @@
 import { ILoadProblemByIdUseCase } from '@domain/usecases'
 import { TReturnProblemDTO } from '../../dtos'
+import { IFailValidations, IUseCasesReturn } from '../../protocols'
 import { ILoadProblemByIdRepository } from '../../repositories'
 
 export class LoadProblemByIdService implements ILoadProblemByIdUseCase {
   constructor (private readonly loadProblemByIdRepository: ILoadProblemByIdRepository) {}
-  async execute (problemId: string): Promise<TReturnProblemDTO> {
+  async execute (problemId: string): Promise<IUseCasesReturn<TReturnProblemDTO>> {
     const problem = await this.loadProblemByIdRepository.execute(problemId)
+    const failValidations: IFailValidations = {}
+    if (!problem) {
+      failValidations.problemNotFound = true
+      return { failValidations }
+    }
 
-    if (!problem) return null
-
-    return problem
+    return { content: problem }
   }
 }

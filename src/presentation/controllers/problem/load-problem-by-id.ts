@@ -15,11 +15,14 @@ export class LoadProblemByIdController implements IController {
       if (error) return badRequest(error)
 
       const { id } = httpRequest.params
-      const problem = await this.loadProblemByIdService.execute(id)
+      const response = await this.loadProblemByIdService.execute(id)
+      const { content, failValidations: fail } = response
 
-      if (!problem) return forbidden(new ResourceNotFoundError('problem'))
+      if (fail) {
+        if (fail.problemNotFound) return forbidden(new ResourceNotFoundError('problem'))
+      }
 
-      return ok(problem)
+      return ok(content)
     } catch (error) {
       serverError(error)
     }
