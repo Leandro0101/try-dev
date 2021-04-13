@@ -1,11 +1,11 @@
 export interface IFailValidations {
   userOrSolutionNonexistent?: boolean
   userOrProblemNonexistent?: boolean
+  emailAlreadyRegister?: boolean
   userAlreadyGivedStar?: boolean
-  problemNotFound?: boolean
   solutionNotFound?: boolean
+  problemNotFound?: boolean
   userNotFound?: boolean
-
 }
 
 export interface IUseCasesReturn <T> {
