@@ -1,7 +1,7 @@
+import { IController, IHttpRequest, IHttpResponse, IValidation } from '../../protocols'
+import { badRequest, forbidden, ok, serverError } from '../../helpers/http'
 import { ILoadSolutionByIdUseCase } from '@domain/usecases'
 import { ResourceNotFoundError } from '../../errors'
-import { badRequest, forbidden, ok, serverError } from '../../helpers/http'
-import { IController, IHttpRequest, IHttpResponse, IValidation } from '../../protocols'
 
 export class LoadSolutionByIdController implements IController {
   constructor (private readonly loadSolutionByIdService: ILoadSolutionByIdUseCase,
@@ -13,11 +13,13 @@ export class LoadSolutionByIdController implements IController {
 
       if (error) return badRequest(error)
 
-      const solution = await this.loadSolutionByIdService.execute(httpRequest.params.id)
+      const response = await this.loadSolutionByIdService.execute(
+        httpRequest.params.id)
 
-      if (!solution) return forbidden(new ResourceNotFoundError('solution'))
+      const { content, failValidations: fail } = response
+      if (fail) return forbidden(new ResourceNotFoundError('solution'))
 
-      return ok(solution)
+      return ok(content)
     } catch (error) {
       return serverError(error)
     }
