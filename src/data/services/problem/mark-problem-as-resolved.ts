@@ -1,5 +1,6 @@
-import { IMarkProblemAsResolvedUseCase } from '@domain/usecases'
 import { ILoadProblemByIdRepository, IMarkProblemAsResolvedRepository } from '../../repositories'
+import { IMarkProblemAsResolvedUseCase } from '@domain/usecases'
+import { IFailValidations, IUseCasesReturn } from '../../protocols'
 
 export class MarkProblemAsResolvedService implements IMarkProblemAsResolvedUseCase {
   constructor (
@@ -7,11 +8,15 @@ export class MarkProblemAsResolvedService implements IMarkProblemAsResolvedUseCa
     private readonly loadProblemByIdRepository: ILoadProblemByIdRepository
   ) {}
 
-  async execute (problemId: string): Promise<void> {
+  async execute (problemId: string): Promise<IUseCasesReturn<void>> {
     const problem = await this.loadProblemByIdRepository.execute(problemId)
-
-    if (!problem) return null
+    const failValidations: IFailValidations = {}
+    if (!problem) {
+      failValidations.problemNotFound = true
+      return { failValidations }
+    }
 
     await this.markProblemAsResolvedRepository.execute(problem)
+    return { }
   }
 }
