@@ -11,14 +11,17 @@ export class AddProblemController implements IController {
       const { userId } = httpRequest.params
       const { title, description } = httpRequest.body
       const error = this.validation.validate({ title, description, userId })
-
       if (error) return badRequest(error)
 
-      const problem = await this.addProblemService.execute({ fields: httpRequest.body, userId })
+      const response = await this.addProblemService
+        .execute({ fields: httpRequest.body, userId })
 
-      if (!problem) return forbidden(new ResourceNotFoundError('user'))
+      const { content, failValidations: fail } = response
+      if (fail) {
+        if (fail.userNotFound) return forbidden(new ResourceNotFoundError('user'))
+      }
 
-      return ok(problem)
+      return ok(content)
     } catch (error) {
       return serverError(error)
     }

@@ -1,3 +1,4 @@
+import { IUseCasesReturn } from '@data/protocols'
 import { ICreateProblemDTO, TReturnProblemDTO } from '../../../data/dtos'
 
 export interface ICreateProblemModel {
@@ -6,5 +7,5 @@ export interface ICreateProblemModel {
 }
 
 export interface IAddProblemUseCase {
-  execute: (createProblemData: ICreateProblemModel) => Promise<TReturnProblemDTO>
+  execute: (createProblemData: ICreateProblemModel) => Promise<IUseCasesReturn<TReturnProblemDTO>>
 }

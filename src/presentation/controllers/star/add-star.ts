@@ -13,19 +13,19 @@ export class AddStarController implements IController {
       const { value } = httpRequest.query
       const { solutionId, userId } = httpRequest.params
       const error = this.validation.validate({ value, solutionId })
-
       if (error) return badRequest(error)
 
-      const { content, failValidations } = await this.addStarService.execute({
+      const response = await this.addStarService.execute({
         userId, solutionId, value
       })
 
-      if (failValidations) {
-        if (failValidations.userOrSolutionNonexistent) {
+      const { content, failValidations: fail } = response
+      if (fail) {
+        if (fail.userOrSolutionNonexistent) {
           return forbidden(new ResourceNotFoundError('solution ou user'))
         }
 
-        if (failValidations.userAlreadyGivedStar) return forbidden(new AlreadyGivenStarError())
+        if (fail.userAlreadyGivedStar) return forbidden(new AlreadyGivenStarError())
       }
 
       return ok(content)
