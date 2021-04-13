@@ -10,13 +10,12 @@ export class LoadSolutionByIdController implements IController {
   async handle (httpRequest: IHttpRequest): Promise<IHttpResponse> {
     try {
       const error = this.validation.validate(httpRequest.params)
-
       if (error) return badRequest(error)
 
       const response = await this.loadSolutionByIdService.execute(
         httpRequest.params.id)
-
       const { content, failValidations: fail } = response
+
       if (fail) return forbidden(new ResourceNotFoundError('solution'))
 
       return ok(content)

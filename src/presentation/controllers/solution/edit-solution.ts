@@ -12,14 +12,16 @@ export class EditSolutionController implements IController {
   async handle (httpRequest: IHttpRequest): Promise<IHttpResponse> {
     const { description, sourceCode } = httpRequest.body
     const { solutionId } = httpRequest.params
-    const error = this.validation.validate({ description, sourceCode, solutionId })
+    const error = this.validation.validate({
+      description, sourceCode, solutionId
+    })
     if (error) return badRequest(error)
 
     const response = await this.editSolutionService.execute({
       solutionId, description, sourceCode
     })
-
     const { content, failValidations: fail } = response
+
     if (fail) return forbidden(new ResourceNotFoundError('solution'))
 
     return ok(content)

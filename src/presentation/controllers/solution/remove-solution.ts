@@ -13,12 +13,12 @@ export class RemoveSolutionController implements IController {
     try {
       const { solutionId } = httpRequest.params
       const error = this.validation.validate({ solutionId })
-
       if (error) return badRequest(error)
 
       const response = await this.removeSolutionService.execute(solutionId)
+      const { failValidations: fail } = response
 
-      if (response === null) return forbidden(new ResourceNotFoundError('solution'))
+      if (fail) return forbidden(new ResourceNotFoundError('solution'))
 
       return ok()
     } catch (error) {

@@ -11,7 +11,10 @@ export class AddSolutionController implements IController {
     try {
       const { userId, problemId } = httpRequest.params
       const { sourceCode, description } = httpRequest.body
-      const error = this.validation.validate({ userId, problemId, description, sourceCode })
+
+      const error = this.validation.validate({
+        userId, problemId, description, sourceCode
+      })
       if (error) return badRequest(error)
 
       const response = await this.addSolutionService.execute({
