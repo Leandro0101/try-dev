@@ -1,9 +1,10 @@
 import { Express, Router } from 'express'
 import {
+  loadUserByIdRoute, loadProblemsByUserRoute, removeSolutionRoute,
+  editSolutionRoute, loadProblemByIdRoute, loadSolutionByIdRoute,
   addUserRoute, addProblemRoute, addSolutionRoute,
   addStarRoute, markProblemAsResolvedRoute,
-  editSolutionRoute, loadProblemByIdRoute, loadSolutionByIdRoute,
-  loadUserByIdRoute, loadProblemsByUserRoute, removeSolutionRoute
+  editProblemRoute
 } from '../routes'
 
 export default (app: Express): void => {
@@ -20,4 +21,5 @@ export default (app: Express): void => {
   loadProblemsByUserRoute(routes)
   markProblemAsResolvedRoute(routes)
   editSolutionRoute(routes)
+  editProblemRoute(routes)
 }
