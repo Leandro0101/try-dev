@@ -1,0 +1,14 @@
+import { IProblemEntity } from '@domain/entities'
+import { IMostPopularProblemsUseCase } from '@domain/usecases'
+import { IMostPopularProblemsRepository } from '../../repositories'
+
+export class MostPopularProblemsService implements IMostPopularProblemsUseCase {
+  constructor (
+    private readonly mostPopularProblems: IMostPopularProblemsRepository) {}
+
+  async execute (skip: number): Promise<IProblemEntity[]> {
+    const problems = await this.mostPopularProblems.execute(skip)
+
+    return problems
+  }
+}
