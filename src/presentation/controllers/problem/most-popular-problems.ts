@@ -7,7 +7,9 @@ export class MostPopularProblemsController implements IController {
     private readonly mostPopularProblems: IMostPopularProblemsUseCase) {}
 
   async handle (httpRequest: IHttpRequest): Promise<IHttpResponse> {
-    const problems = await this.mostPopularProblems.execute(1)
+    const { year } = httpRequest.body
+    const { page } = httpRequest.query
+    const problems = await this.mostPopularProblems.execute(page, Number(year))
 
     return ok(problems)
   }

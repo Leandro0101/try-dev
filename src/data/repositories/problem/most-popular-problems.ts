@@ -1,5 +1,5 @@
 import { IProblemEntity } from '@domain/entities'
 
 export interface IMostPopularProblemsRepository {
-  execute: (skip: number) => Promise<IProblemEntity[]>
+  execute: (skip: number, year: number) => Promise<IProblemEntity[]>
 }

@@ -4,7 +4,9 @@ import { badRequest, forbidden, ok, serverError } from '../../helpers/http'
 import { IController, IHttpRequest, IHttpResponse, IValidation } from '../../protocols'
 
 export class AddProblemController implements IController {
-  constructor (private readonly addProblemService: IAddProblemUseCase, private readonly validation: IValidation) {}
+  constructor (
+    private readonly addProblemService: IAddProblemUseCase,
+    private readonly validation: IValidation) {}
 
   async handle (httpRequest: IHttpRequest): Promise<IHttpResponse> {
     try {

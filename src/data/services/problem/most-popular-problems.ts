@@ -6,8 +6,11 @@ export class MostPopularProblemsService implements IMostPopularProblemsUseCase {
   constructor (
     private readonly mostPopularProblems: IMostPopularProblemsRepository) {}
 
-  async execute (skip: number): Promise<IProblemEntity[]> {
-    const problems = await this.mostPopularProblems.execute(skip)
+  async execute (skip: number, year: number): Promise<IProblemEntity[]> {
+    if (!year) {
+      year = new Date().getFullYear()
+    }
+    const problems = await this.mostPopularProblems.execute(skip, year)
 
     return problems
   }
