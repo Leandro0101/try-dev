@@ -1,12 +1,14 @@
 import { IProblemEntity } from '@domain/entities'
 import { IMostPopularProblemsRepository } from '@data/repositories'
 import { getConnection } from 'typeorm'
+import { IParamsToLoading } from '@/src/domain/usecases'
 
 export class MostPopularProblemsRepository implements IMostPopularProblemsRepository {
-  async execute (skip: number, year: number): Promise<IProblemEntity[]> {
+  async execute (paramsToLoading: IParamsToLoading): Promise<IProblemEntity[]> {
+    const { intervalInit, intervalFinal, skip } = paramsToLoading
     const connection = getConnection()
     const queryRunner = connection.createQueryRunner()
-    const take = 5
+    const take = 15
     const problems = await queryRunner.query(
       // eslint-disable-next-line @typescript-eslint/quotes
       `SELECT  
@@ -14,7 +16,8 @@ export class MostPopularProblemsRepository implements IMostPopularProblemsReposi
       FROM problems p
       INNER JOIN solutions s 
       ON (p.id=s."problemId") 
-      WHERE extract( year from s."createdAt" )=${year}
+      WHERE extract( year from s."createdAt" )>=${intervalInit} AND
+      extract( year from s."createdAt")<=${intervalFinal}
       GROUP BY (p.id) 
       ORDER BY (solutionsQuantity) DESC
       OFFSET ${take}*${skip - 1}
