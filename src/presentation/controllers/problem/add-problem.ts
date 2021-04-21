@@ -1,6 +1,6 @@
 import { IAddProblemUseCase } from '@domain/usecases/problem/add-problem'
 import { ResourceNotFoundError } from '../../errors'
-import { badRequest, forbidden, ok, serverError } from '../../helpers/http'
+import { badRequest, notFound, ok, serverError } from '../../helpers/http'
 import { IController, IHttpRequest, IHttpResponse, IValidation } from '../../protocols'
 
 export class AddProblemController implements IController {
@@ -19,7 +19,7 @@ export class AddProblemController implements IController {
         .execute({ fields: httpRequest.body, userId })
 
       const { content, failValidations: fail } = response
-      if (fail) return forbidden(new ResourceNotFoundError('user'))
+      if (fail) return notFound(new ResourceNotFoundError('user'))
 
       return ok(content)
     } catch (error) {

@@ -1,6 +1,6 @@
 import { ILoadUserByIdUseCase } from '@domain/usecases'
 import { IController, IHttpRequest, IHttpResponse, IValidation } from '../../protocols'
-import { badRequest, forbidden, ok, serverError } from '../../helpers/http'
+import { badRequest, notFound, ok, serverError } from '../../helpers/http'
 import { ResourceNotFoundError } from '../../errors'
 
 export class LoadUserByIdController implements IController {
@@ -16,7 +16,7 @@ export class LoadUserByIdController implements IController {
       const response = await this.loadUserByIdService.execute(httpRequest.params.id)
       const { content, failValidations: fail } = response
 
-      if (fail) return forbidden(new ResourceNotFoundError('user'))
+      if (fail) return notFound(new ResourceNotFoundError('user'))
 
       return ok(content)
     } catch (error) {

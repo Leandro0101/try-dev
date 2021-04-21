@@ -1,5 +1,5 @@
 import { IController, IHttpRequest, IHttpResponse, IValidation } from '../../protocols'
-import { badRequest, forbidden, ok } from '../../helpers/http'
+import { badRequest, notFound, ok } from '../../helpers/http'
 import { IEditSolutionUseCase } from '@domain/usecases'
 import { ResourceNotFoundError } from '../../errors'
 
@@ -22,7 +22,7 @@ export class EditSolutionController implements IController {
     })
     const { content, failValidations: fail } = response
 
-    if (fail) return forbidden(new ResourceNotFoundError('solution'))
+    if (fail) return notFound(new ResourceNotFoundError('solution'))
 
     return ok(content)
   }

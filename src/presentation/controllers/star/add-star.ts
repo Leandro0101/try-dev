@@ -1,6 +1,6 @@
 import { IAddStarUseCase } from '@domain/usecases'
 import { AlreadyGivenStarError, ResourceNotFoundError } from '../../errors'
-import { badRequest, forbidden, ok, serverError } from '../../helpers/http'
+import { badRequest, forbidden, notFound, ok, serverError } from '../../helpers/http'
 import { IController, IHttpRequest, IHttpResponse, IValidation } from '../../protocols'
 
 export class AddStarController implements IController {
@@ -22,7 +22,7 @@ export class AddStarController implements IController {
       const { content, failValidations: fail } = response
       if (fail) {
         if (fail.userOrSolutionNonexistent) {
-          return forbidden(new ResourceNotFoundError('solution ou user'))
+          return notFound(new ResourceNotFoundError('solution ou user'))
         }
 
         if (fail.userAlreadyGivedStar) return forbidden(new AlreadyGivenStarError())

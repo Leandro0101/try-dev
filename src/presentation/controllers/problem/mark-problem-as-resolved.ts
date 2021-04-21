@@ -1,6 +1,6 @@
 import { IMarkProblemAsResolvedUseCase } from '@domain/usecases'
 import { IHttpRequest, IHttpResponse, IController, IValidation } from '../../protocols'
-import { badRequest, forbidden, ok, serverError } from '../../helpers/http'
+import { badRequest, notFound, ok, serverError } from '../../helpers/http'
 import { ResourceNotFoundError } from '../../errors'
 
 export class MarkProblemAsResolvedController implements IController {
@@ -17,7 +17,7 @@ export class MarkProblemAsResolvedController implements IController {
       const response = await this.markProblemAsResolvedService.execute(problemId)
       const { failValidations: fail } = response
 
-      if (fail) return forbidden(new ResourceNotFoundError('problem'))
+      if (fail) return notFound(new ResourceNotFoundError('problem'))
 
       return ok()
     } catch (error) {
