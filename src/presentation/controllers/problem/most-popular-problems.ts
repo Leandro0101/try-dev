@@ -1,16 +1,21 @@
-import { IController, IHttpRequest, IHttpResponse } from '../../protocols'
+import { IController, IHttpRequest, IHttpResponse, IValidation } from '../../protocols'
 import { IMostPopularProblemsUseCase } from '@domain/usecases'
-import { ok } from '../../helpers/http'
+import { badRequest, ok } from '../../helpers/http'
 
 export class MostPopularProblemsController implements IController {
   constructor (
-    private readonly mostPopularProblems: IMostPopularProblemsUseCase) {}
+    private readonly mostPopularProblems: IMostPopularProblemsUseCase,
+    private readonly validations: IValidation) {}
 
   async handle (httpRequest: IHttpRequest): Promise<IHttpResponse> {
     const { intervalInit, intervalFinal } = httpRequest.body
     const { page } = httpRequest.query
+    const error = this.validations.validate({ intervalInit, intervalFinal, page })
+
+    if (error) return badRequest(error)
+
     const problems = await this.mostPopularProblems.execute({
-      skip: page,
+      skip: Number(page),
       intervalInit: Number(intervalInit),
       intervalFinal: Number(intervalFinal)
     })

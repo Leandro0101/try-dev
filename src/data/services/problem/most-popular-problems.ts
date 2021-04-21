@@ -7,7 +7,23 @@ export class MostPopularProblemsService implements IMostPopularProblemsUseCase {
     private readonly mostPopularProblems: IMostPopularProblemsRepository) {}
 
   async execute (paramsToLoading: IParamsToLoading): Promise<IProblemEntity[]> {
-    const problems = await this.mostPopularProblems.execute(paramsToLoading)
+    const { intervalFinal, intervalInit, skip } = paramsToLoading
+
+    if (intervalInit && intervalFinal) {
+      return await this.mostPopularProblems.withYearIntervalBetween(paramsToLoading)
+    }
+
+    if (!intervalFinal) {
+      return await this.mostPopularProblems.withYearGreaterOrEqualThan(intervalInit, skip)
+    }
+
+    if (!intervalInit) {
+      return await this.mostPopularProblems.withYearLessOrEqualThan(intervalFinal, skip)
+    }
+
+    const currentyYear = new Date().getFullYear()
+    const problems = await this.mostPopularProblems.withYearLessOrEqualThan(
+      currentyYear, skip)
 
     return problems
   }
