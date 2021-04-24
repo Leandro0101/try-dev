@@ -12,7 +12,7 @@ export class AddStarController implements IController {
     try {
       const { value } = httpRequest.query
       const { solutionId, userId } = httpRequest.params
-      const error = this.validation.validate({ value, solutionId })
+      const error = this.validation.validate({ value, solutionId, userId })
       if (error) return badRequest(error)
 
       const response = await this.addStarService.execute({

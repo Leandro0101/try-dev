@@ -7,6 +7,7 @@ export const makeAddStarValidation = (): ValidationComposite => {
   const validations: IValidation[] = []
 
   validations.push(new RequiredParamValidation('value'))
+  validations.push(makeUUIDValidation('userId'))
   validations.push(makeUUIDValidation('solutionId'))
 
   return new ValidationComposite(validations)
