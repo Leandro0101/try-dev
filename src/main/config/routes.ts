@@ -5,7 +5,8 @@ import {
   addUserRoute, addProblemRoute, addSolutionRoute,
   addStarRoute, markProblemAsResolvedRoute,
   editProblemRoute,
-  mostPopularProblemsRoute
+  mostPopularProblemsRoute,
+  mostPopularSolutionsRoute
 } from '../routes'
 
 export default (app: Express): void => {
@@ -24,4 +25,5 @@ export default (app: Express): void => {
   editSolutionRoute(routes)
   editProblemRoute(routes)
   mostPopularProblemsRoute(routes)
+  mostPopularSolutionsRoute(routes)
 }
