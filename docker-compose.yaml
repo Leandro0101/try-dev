@@ -9,7 +9,6 @@ services:
       - "3000:3000"
     volumes:
       - .:/home/trydev_api
-      - /home/trydev_api/node_modules
 
   database: 
     image: postgres

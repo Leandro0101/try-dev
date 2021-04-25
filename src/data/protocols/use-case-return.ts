@@ -3,6 +3,7 @@ export interface IFailValidations {
   userOrProblemNonexistent?: boolean
   emailAlreadyRegister?: boolean
   userAlreadyGivedStar?: boolean
+  invalidCredentials?: boolean
   solutionNotFound?: boolean
   problemNotFound?: boolean
   userNotFound?: boolean

@@ -1,12 +1,13 @@
-import { IEncrypter } from '@data/protocols/criptograpy/encrypter'
-import { IHashComparer } from '@data/protocols/criptograpy/hash-comparer'
+import { IHashComparator, IEncrypter } from '@data/protocols'
 import bcrypt from 'bcrypt'
 
-export class BcryptAdapter implements IEncrypter, IHashComparer {
-  constructor (private readonly salt: number) {}
+export class BcryptAdapter implements IEncrypter, IHashComparator {
+  constructor (private readonly salt?: number) {}
 
   async compare (plaintext: string, ciphertext: string): Promise<boolean> {
-    return null
+    const isValid = await bcrypt.compareSync(plaintext, ciphertext)
+
+    return isValid
   }
 
   async encrypt (plaintext: string): Promise<string> {
