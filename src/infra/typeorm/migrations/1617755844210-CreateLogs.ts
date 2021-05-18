@@ -5,11 +5,22 @@ export class CreateLogs1617755844210 implements MigrationInterface {
     await queryRunner.createTable(
       new Table({
         name: 'logs',
-        columns: [
-          { name: 'id', type: 'uuid', isPrimary: true },
-          { name: 'stack', type: 'varchar' },
-          { name: 'createdAt', type: 'timestamp', default: 'now()' }
-        ]
+        columns: [{
+          name: 'id',
+          type: 'varchar',
+          isPrimary: true,
+          generationStrategy: 'uuid',
+          default: 'uuid_generate_v4()'
+        },
+        {
+          name: 'stack',
+          type: 'varchar'
+        },
+        {
+          name: 'createdAt',
+          type: 'timestamp',
+          default: 'now()'
+        }]
       })
     )
   }

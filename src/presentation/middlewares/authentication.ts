@@ -12,6 +12,6 @@ export class AuthMiddleware implements IMiddleware {
     if (!token) return forbidden(new AccessDeniedError())
     const tokenValue = await this.decrypter.decrypt(token)
     if (!tokenValue) return forbidden(new AccessDeniedError())
-    return ok({ userId: tokenValue.userId })
+    return ok({ tokenValue })
   }
 }

@@ -4,7 +4,7 @@ export class AddColumnUserAtProblems1615917795842 implements MigrationInterface 
   public async up (queryRunner: QueryRunner): Promise<void> {
     await queryRunner.addColumns('problems', [new TableColumn({
       name: 'userId',
-      type: 'uuid'
+      type: 'varchar'
     })])
 
     await queryRunner.createForeignKey('problems', new TableForeignKey({

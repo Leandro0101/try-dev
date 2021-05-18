@@ -11,5 +11,5 @@ export const makeAuthenticationService = (): IAuthenticationUseCase => {
   const hashComparator: IHashComparator = new BcryptAdapter()
   const tokenGenerator: ITokenGenerator = new JWTAdapter()
 
-  return new AuthenticationService(loadUserByEmail, hashComparator, tokenGenerator, 2983)
+  return new AuthenticationService(loadUserByEmail, hashComparator, tokenGenerator)
 }

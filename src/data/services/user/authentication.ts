@@ -9,8 +9,7 @@ export class AuthenticationService implements IAuthenticationUseCase {
   constructor (
     private readonly loadUserByEmail: ILoadUserByEmailRepository,
     private readonly hashComparator: IHashComparator,
-    private readonly tokenGenerator: ITokenGenerator,
-    private readonly tokenTimeExpiration: number
+    private readonly tokenGenerator: ITokenGenerator
   ) {
 
   }
@@ -22,9 +21,7 @@ export class AuthenticationService implements IAuthenticationUseCase {
     if (user) {
       const isValid = await this.hashComparator.compare(password, user.password)
       if (isValid) {
-        const token = await this.tokenGenerator.generate({
-          userId: user.id, timeExpiration: this.tokenTimeExpiration
-        })
+        const token = await this.tokenGenerator.generate(user.id)
 
         return { content: token }
       }

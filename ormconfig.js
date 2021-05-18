@@ -9,5 +9,5 @@ module.exports = {
   migrations: ['./src/infra/typeorm/migrations/**.ts'],
   cli: {
     migrationsDir: './src/infra/typeorm/migrations'
-  },
+  }
 }

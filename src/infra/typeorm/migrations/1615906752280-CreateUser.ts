@@ -5,13 +5,30 @@ export class CreateUser1615906752280 implements MigrationInterface {
     await queryRunner.createTable(
       new Table({
         name: 'users',
-        columns: [
-          { name: 'id', type: 'uuid', isPrimary: true },
-          { name: 'name', type: 'varchar' },
-          { name: 'email', type: 'varchar' },
-          { name: 'password', type: 'varchar' },
-          { name: 'createdAt', type: 'timestamp', default: 'now()' }
-        ]
+        columns: [{
+          name: 'id',
+          type: 'varchar',
+          isPrimary: true,
+          generationStrategy: 'uuid',
+          default: 'uuid_generate_v4()'
+        },
+        {
+          name: 'name',
+          type: 'varchar'
+        },
+        {
+          name: 'email',
+          type: 'varchar'
+        },
+        {
+          name: 'password',
+          type: 'varchar'
+        },
+        {
+          name: 'createdAt',
+          type: 'timestamp',
+          default: 'now()'
+        }]
       })
     )
   }

@@ -3,7 +3,6 @@ import {
   Entity, PrimaryGeneratedColumn, Column,
   CreateDateColumn, ManyToOne, OneToMany
 } from 'typeorm'
-import { v4 as uuid } from 'uuid'
 import { ProblemModel, StarModel, UserModel } from '.'
 
 @Entity('solutions')
@@ -31,6 +30,5 @@ export class SolutionModel implements ISolutionEntity {
 
   constructor (props: Omit<SolutionModel, 'id' | 'createdAt' | 'user' | 'problem' | 'stars'>) {
     Object.assign(this, props)
-    if (!this.id) this.id = uuid()
   }
 }
