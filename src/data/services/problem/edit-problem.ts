@@ -1,7 +1,7 @@
 import { IEditProblemRepository, ILoadProblemByIdRepository } from '../../repositories'
 import { IEditProblemModel, IEditProblemUseCase } from '@domain/usecases'
 import { IFailValidations, IUseCasesReturn } from '../../protocols'
-import { IProblemEntity } from '@domain/entities'
+import { TReturnProblemDTO } from '../../dtos'
 
 export class EditProblemService implements IEditProblemUseCase {
   constructor (
@@ -9,19 +9,19 @@ export class EditProblemService implements IEditProblemUseCase {
     private readonly loadProblemById: ILoadProblemByIdRepository
   ) {}
 
-  async execute (editProblemData: IEditProblemModel): Promise<IUseCasesReturn<IProblemEntity>> {
+  async execute (editProblemData: IEditProblemModel): Promise<IUseCasesReturn<TReturnProblemDTO>> {
     const { problemId, description, title } = editProblemData
     let problem = await this.loadProblemById.execute(problemId)
 
-    const failValidations: IFailValidations = {}
+    const failValidations: IFailValidations = { }
     if (!problem) {
       failValidations.problemNotFound = true
       return { failValidations }
     }
 
     problem = Object.assign(problem, { description, title })
-    const updatedProblem = await this.editProblem.execute(problem)
-
-    return { content: updatedProblem }
+    await this.editProblem.execute(problem)
+    const { user, solutions, ...dataProblem } = problem
+    return { content: dataProblem }
   }
 }
