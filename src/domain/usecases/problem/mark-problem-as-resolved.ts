@@ -1,5 +1,5 @@
 import { IUseCasesReturn } from '@data/protocols'
 
 export interface IMarkProblemAsResolvedUseCase {
-  execute: (problemId: string) => Promise<IUseCasesReturn<void>>
+  execute: (problemId: string, userId: string) => Promise<IUseCasesReturn<void>>
 }

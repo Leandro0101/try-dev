@@ -7,6 +7,7 @@ export interface IFailValidations {
   solutionNotFound?: boolean
   problemNotFound?: boolean
   userNotFound?: boolean
+  hasPermission?: boolean
 }
 
 export interface IUseCasesReturn <T> {

@@ -9,7 +9,8 @@ export const adaptMiddleware = (middleware: IMiddleware) => {
 
     const httpResponse: IHttpResponse = await middleware.handle(httpRequest)
     if (httpResponse.statusCode === 200) {
-      Object.assign(request, httpResponse.body)
+      const { userId } = httpResponse.body.tokenValue
+      Object.assign(request.params, { userId })
       next()
     } else {
       response.status(httpResponse.statusCode).json({
