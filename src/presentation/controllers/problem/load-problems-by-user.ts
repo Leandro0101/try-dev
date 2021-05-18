@@ -1,5 +1,6 @@
 import { ILoadProblemsByUserUseCase } from '@domain/usecases'
-import { badRequest, ok, serverError } from '../../helpers/http'
+import { ResourceNotFoundError } from '../../errors'
+import { badRequest, notFound, ok, serverError } from '../../helpers/http'
 import { IHttpRequest, IHttpResponse, IValidation, IController } from '../../protocols'
 
 export class LoadProblemsByUserController implements IController {
@@ -13,9 +14,13 @@ export class LoadProblemsByUserController implements IController {
       const { userId, page } = httpRequest.params
       const error = this.validation.validate({ userId })
       if (error) return badRequest(error)
-      const problems = await this.loadProblemsByUserService.execute(userId, Number(page))
 
-      return ok(problems)
+      const response = await this.loadProblemsByUserService
+        .execute(userId, Number(page))
+
+      const { content, failValidations: fail } = response
+      if (fail) return notFound(new ResourceNotFoundError('user'))
+      return ok(content)
     } catch (error) {
       return serverError(error)
     }

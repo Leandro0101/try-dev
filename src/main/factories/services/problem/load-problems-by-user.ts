@@ -1,10 +1,9 @@
 import { LoadProblemsByUserService } from '@data/services'
 import { ILoadProblemsByUserUseCase } from '@domain/usecases'
-import { ILoadProblemsByUserRepository } from '@data/repositories'
-import { LoadProblemsByUserRepository } from '@infra/typeorm/repositories'
+import { LoadProblemsByUserRepository, LoadUserByIdRepository } from '@infra/typeorm/repositories'
 
 export const makeLoadProblemsByUserService = (): ILoadProblemsByUserUseCase => {
-  const loadProblemsByUserRepository: ILoadProblemsByUserRepository = new LoadProblemsByUserRepository()
-
-  return new LoadProblemsByUserService(loadProblemsByUserRepository)
+  const loadProblemsByUserRepository = new LoadProblemsByUserRepository()
+  const loadUserByIdRepository = new LoadUserByIdRepository()
+  return new LoadProblemsByUserService(loadProblemsByUserRepository, loadUserByIdRepository)
 }
