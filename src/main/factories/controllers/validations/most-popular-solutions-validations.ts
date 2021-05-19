@@ -9,9 +9,9 @@ export const makeMostPopularSolutionsValidations = (): ValidationComposite => {
   const validations: IValidation[] = []
 
   validations.push(new RequiredParamValidation('page'))
-  validations.push(new RequiredParamValidation('p'))
+  validations.push(new RequiredParamValidation('problem'))
   validations.push(new IsANumberValidation('page'))
-  validations.push(new UUIDValidation('p', new UUIDValidatorAdapter()))
+  validations.push(new UUIDValidation('problem', new UUIDValidatorAdapter()))
 
   return new ValidationComposite(validations)
 }

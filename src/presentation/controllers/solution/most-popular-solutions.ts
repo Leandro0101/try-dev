@@ -10,11 +10,11 @@ export class MostPopularSolutionsController implements IController {
 
   async handle (httpRequest: IHttpRequest): Promise<IHttpResponse> {
     try {
-      const { page, p } = httpRequest.query
-      const error = this.validations.validate({ page, p })
+      const { page, problem } = httpRequest.query
+      const error = this.validations.validate({ page, problem })
       if (error) return badRequest(error)
 
-      const response = await this.mostPopularSolutions.execute(p, Number(page))
+      const response = await this.mostPopularSolutions.execute(problem, Number(page))
       const { content, failValidations: fail } = response
 
       if (fail) return notFound(new ResourceNotFoundError('problem'))
