@@ -5,5 +5,5 @@ import { makeAddSolutionController } from '../../factories/controllers'
 import { makeAuthMiddleware } from '../../factories/middlewares/auth'
 
 export const addSolutionRoute = (router: Router): void => {
-  router.post('/solutions/:userId/:problemId', adaptMiddleware(makeAuthMiddleware()), adaptRoute(makeAddSolutionController()))
+  router.post('/solutions/:problemId', adaptMiddleware(makeAuthMiddleware()), adaptRoute(makeAddSolutionController()))
 }

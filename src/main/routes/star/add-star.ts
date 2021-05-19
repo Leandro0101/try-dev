@@ -5,5 +5,5 @@ import { makeAddStarController } from '../../factories/controllers'
 import { makeAuthMiddleware } from '../../factories/middlewares/auth'
 
 export const addStarRoute = (router: Router): void => {
-  router.post('/stars/:userId/:solutionId', adaptMiddleware(makeAuthMiddleware()), adaptRoute(makeAddStarController()))
+  router.post('/stars/:solutionId', adaptMiddleware(makeAuthMiddleware()), adaptRoute(makeAddStarController()))
 }
