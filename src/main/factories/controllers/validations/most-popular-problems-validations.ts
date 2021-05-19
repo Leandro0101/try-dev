@@ -1,4 +1,4 @@
-import { IsANumberValidation, ValidationComposite } from '@validations/validators'
+import { IsANumberValidation, PageValidation, ValidationComposite } from '@validations/validators'
 import { IValidation } from '@presentation/protocols'
 
 export const makeMostPopularProblemsValidations = (): ValidationComposite => {
@@ -8,5 +8,6 @@ export const makeMostPopularProblemsValidations = (): ValidationComposite => {
     validations.push(new IsANumberValidation(field))
   }
 
+  validations.push(new PageValidation('page'))
   return new ValidationComposite(validations)
 }
