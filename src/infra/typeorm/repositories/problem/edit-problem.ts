@@ -1,12 +1,15 @@
+import { ProblemModel } from '@data/models'
 import { IEditProblemRepository } from '@data/repositories'
 import { IProblemEntity } from '@domain/entities'
-import { getCustomRepository } from 'typeorm'
-import { BaseProblemRepository } from '../base-problem-repository'
+import { getConnection } from 'typeorm'
 
 export class EditProblemRepository implements IEditProblemRepository {
   async execute (problem: IProblemEntity): Promise<IProblemEntity> {
-    const baseRepository = getCustomRepository(BaseProblemRepository)
-    await baseRepository.save(problem)
+    const { title, description } = problem
+    await getConnection().createQueryBuilder().update(ProblemModel)
+      .set({ title, description })
+      .where('id = :id', { id: problem.id })
+      .execute()
 
     return problem
   }

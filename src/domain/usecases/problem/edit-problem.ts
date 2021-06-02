@@ -8,5 +8,5 @@ export interface IEditProblemModel {
 }
 
 export interface IEditProblemUseCase {
-  execute: (editSolutionData: IEditProblemModel) => Promise<IUseCasesReturn<TReturnProblemDTO>>
+  execute: (editProblemData: IEditProblemModel, currentUserId: string) => Promise<IUseCasesReturn<TReturnProblemDTO>>
 }

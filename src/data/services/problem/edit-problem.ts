@@ -9,7 +9,7 @@ export class EditProblemService implements IEditProblemUseCase {
     private readonly loadProblemById: ILoadProblemByIdRepository
   ) {}
 
-  async execute (editProblemData: IEditProblemModel): Promise<IUseCasesReturn<TReturnProblemDTO>> {
+  async execute (editProblemData: IEditProblemModel, currentUserId: string): Promise<IUseCasesReturn<TReturnProblemDTO>> {
     const { problemId, description, title } = editProblemData
     let problem = await this.loadProblemById.execute(problemId)
 
