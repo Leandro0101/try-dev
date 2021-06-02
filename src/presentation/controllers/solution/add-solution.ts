@@ -22,7 +22,7 @@ export class AddSolutionController implements IController {
       })
       const { content, failValidations: fail } = response
 
-      if (fail) return notFound(new ResourceNotFoundError('problem or user'))
+      if (fail) return notFound(new ResourceNotFoundError('problem'))
 
       return ok(content)
     } catch (error) {

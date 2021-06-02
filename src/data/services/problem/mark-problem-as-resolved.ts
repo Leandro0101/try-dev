@@ -18,7 +18,7 @@ export class MarkProblemAsResolvedService implements IMarkProblemAsResolvedUseCa
     }
 
     if (userId !== problem.user.id) {
-      failValidations.hasPermission = true
+      failValidations.withoutPermission = true
       return { failValidations }
     }
 

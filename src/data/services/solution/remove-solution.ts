@@ -1,24 +1,29 @@
-import { ILoadSolutionByIdRepository, IRemoveSolutionRepository } from '../../repositories'
+import { ILoadProblemByIdRepository, ILoadSolutionByIdRepository, IRemoveSolutionRepository } from '../../repositories'
 import { IRemoveSolutionUseCase } from '@domain/usecases'
 import { IFailValidations, IUseCasesReturn } from '../../protocols'
 
 export class RemoveSolutionService implements IRemoveSolutionUseCase {
   constructor (
-    private readonly removeSolutionRepository: IRemoveSolutionRepository,
-    private readonly loadSolutionByIdRepository: ILoadSolutionByIdRepository
+    private readonly removeSolution: IRemoveSolutionRepository,
+    private readonly loadSolutionById: ILoadSolutionByIdRepository,
+    private readonly loadProblemById: ILoadProblemByIdRepository
   ) {}
 
-  async execute (solutionId: string): Promise<IUseCasesReturn<void>> {
-    const solution = await this.loadSolutionByIdRepository.execute(solutionId)
-
+  async execute (solutionId: string, currentUserId: string): Promise<IUseCasesReturn<void>> {
+    const solution = await this.loadSolutionById.execute(solutionId)
     const failValidations: IFailValidations = {}
     if (!solution) {
       failValidations.solutionNotFound = true
       return { failValidations }
     }
 
-    await this.removeSolutionRepository.execute(solution)
+    const problem = await this.loadProblemById.execute(solution.problem.id)
+    if (solution.user.id === currentUserId || problem.user.id === currentUserId) {
+      await this.removeSolution.execute(solution)
+      return { }
+    }
 
-    return { }
+    failValidations.withoutPermission = true
+    return { failValidations }
   }
 }

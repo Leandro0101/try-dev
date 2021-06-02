@@ -9,13 +9,18 @@ export class EditSolutionService implements IEditSolutionUseCase {
     private readonly loadSolutionByIdRepository: ILoadSolutionByIdRepository
   ) {}
 
-  async execute (editSolutionData: IEditSolutionModel): Promise<IUseCasesReturn<ISolutionEntity>> {
+  async execute (editSolutionData: IEditSolutionModel, currentUserId: string): Promise<IUseCasesReturn<ISolutionEntity>> {
     const { solutionId, description, sourceCode } = editSolutionData
     let solution = await this.loadSolutionByIdRepository.execute(solutionId)
 
     const failValidations: IFailValidations = {}
     if (!solution) {
       failValidations.solutionNotFound = true
+      return { failValidations }
+    }
+
+    if (solution.user.id !== currentUserId) {
+      failValidations.withoutPermission = true
       return { failValidations }
     }
 

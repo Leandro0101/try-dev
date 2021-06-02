@@ -1,7 +1,7 @@
 import { IController, IHttpRequest, IHttpResponse, IValidation } from '../../protocols'
-import { badRequest, notFound, ok } from '../../helpers/http'
+import { badRequest, forbidden, notFound, ok } from '../../helpers/http'
 import { IEditSolutionUseCase } from '@domain/usecases'
-import { ResourceNotFoundError } from '../../errors'
+import { ResourceNotFoundError, UnauthorizedError } from '../../errors'
 
 export class EditSolutionController implements IController {
   constructor (
@@ -11,7 +11,7 @@ export class EditSolutionController implements IController {
 
   async handle (httpRequest: IHttpRequest): Promise<IHttpResponse> {
     const { description, sourceCode } = httpRequest.body
-    const { solutionId } = httpRequest.params
+    const { solutionId, userId } = httpRequest.params
     const error = this.validation.validate({
       description, sourceCode, solutionId
     })
@@ -19,10 +19,13 @@ export class EditSolutionController implements IController {
 
     const response = await this.editSolutionService.execute({
       solutionId, description, sourceCode
-    })
+    }, userId)
     const { content, failValidations: fail } = response
 
-    if (fail) return notFound(new ResourceNotFoundError('solution'))
+    if (fail) {
+      if (fail.solutionNotFound) return notFound(new ResourceNotFoundError('solution'))
+      if (fail.withoutPermission) return forbidden(new UnauthorizedError())
+    }
 
     return ok(content)
   }

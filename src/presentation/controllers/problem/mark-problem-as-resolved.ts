@@ -21,7 +21,7 @@ export class MarkProblemAsResolvedController implements IController {
           return notFound(new ResourceNotFoundError('problem'))
         }
 
-        if (fail.hasPermission) return forbidden(new UnauthorizedError())
+        if (fail.withoutPermission) return forbidden(new UnauthorizedError())
       }
 
       return ok()

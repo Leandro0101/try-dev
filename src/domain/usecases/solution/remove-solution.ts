@@ -1,5 +1,5 @@
 import { IUseCasesReturn } from '@data/protocols'
 
 export interface IRemoveSolutionUseCase {
-  execute: (solutionId: string) => Promise<IUseCasesReturn<void>>
+  execute: (solutionId: string, currentUserId: string) => Promise<IUseCasesReturn<void>>
 }

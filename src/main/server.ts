@@ -10,6 +10,6 @@ connect().then(async () => {
   // await seeds.get('problems')()
   // await seeds.get('solutions')()
 }).catch(error => {
-  console.log('OCORREU Um ERRO')
+  console.log('OCORREU Um ERR0')
   console.log(error)
 })

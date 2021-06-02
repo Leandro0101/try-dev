@@ -1,5 +1,5 @@
 import {
-  IsANumberValidation, RequiredParamValidation,
+  IsANumberValidation, PageValidation, RequiredParamValidation,
   UUIDValidation, ValidationComposite
 } from '@validations/validators'
 import { IValidation } from '@presentation/protocols'
@@ -11,6 +11,7 @@ export const makeMostPopularSolutionsValidations = (): ValidationComposite => {
   validations.push(new RequiredParamValidation('page'))
   validations.push(new RequiredParamValidation('problem'))
   validations.push(new IsANumberValidation('page'))
+  validations.push(new PageValidation('page'))
   validations.push(new UUIDValidation('problem', new UUIDValidatorAdapter()))
 
   return new ValidationComposite(validations)
