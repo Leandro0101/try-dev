@@ -19,6 +19,11 @@ export class EditProblemService implements IEditProblemUseCase {
       return { failValidations }
     }
 
+    if (problem.user.id !== currentUserId) {
+      failValidations.withoutPermission = true
+      return { failValidations }
+    }
+
     problem = Object.assign(problem, { description, title })
     await this.editProblem.execute(problem)
     const { user, solutions, ...dataProblem } = problem
