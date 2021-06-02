@@ -25,7 +25,6 @@ export class MostPopularProblemsRepository implements IMostPopularProblemsReposi
       GROUP BY (p.id) ORDER BY (solutionsQuantity) DESC 
       OFFSET ${this.take * (skip - 1)} LIMIT ${this.take}`
     )
-    console.log(problems)
     return problems
   }
 
