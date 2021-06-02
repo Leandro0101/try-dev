@@ -6,9 +6,9 @@ import { seeds } from '@infra/typeorm/seeds'
 connect().then(async () => {
   app.listen(3000, () => console.log('RODAND10O'))
   await getConnection().runMigrations()
-  await seeds.get('users')()
-  await seeds.get('problems')()
-  await seeds.get('solutions')()
+  // await seeds.get('users')()
+  // await seeds.get('problems')()
+  // await seeds.get('solutions')()
 }).catch(error => {
   console.log('OCORREU Um ERRO')
   console.log(error)

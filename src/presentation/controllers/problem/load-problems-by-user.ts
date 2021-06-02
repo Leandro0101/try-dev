@@ -11,7 +11,8 @@ export class LoadProblemsByUserController implements IController {
 
   async handle (httpRequest: IHttpRequest): Promise<IHttpResponse> {
     try {
-      const { userId, page } = httpRequest.params
+      const { userId } = httpRequest.params
+      const { page } = httpRequest.query
       const error = this.validation.validate({ userId, page })
       if (error) return badRequest(error)
 

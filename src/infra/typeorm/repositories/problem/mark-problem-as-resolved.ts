@@ -1,12 +1,13 @@
 import { IProblemEntity, IStatusProblem } from '@domain/entities'
 import { IMarkProblemAsResolvedRepository } from '@data/repositories'
-import { getCustomRepository } from 'typeorm'
-import { BaseProblemRepository } from '../base-problem-repository'
+import { getConnection } from 'typeorm'
+import { ProblemModel } from '@data/models'
 
 export class MarkProblemAsResolvedRepository implements IMarkProblemAsResolvedRepository {
   async execute (problem: IProblemEntity): Promise<void> {
-    const baseRepository = getCustomRepository(BaseProblemRepository)
-    problem.status = IStatusProblem.RESOLVED
-    await baseRepository.save(problem)
+    await getConnection().createQueryBuilder().update(ProblemModel)
+      .set({ status: IStatusProblem.RESOLVED })
+      .where('id = :id', { id: problem.id })
+      .execute()
   }
 }
