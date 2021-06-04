@@ -78,7 +78,7 @@ export const starsFactory = async (): Promise<ICreateStarDTO[]> => {
   const users = await baseUserRepository.find()
   const stars = []
   let i = 0
-  while (i < 15000) {
+  while (i < 17000) {
     stars.push({
       solution: solutions[randomNumber(190)],
       user: users[randomNumber(5)],
