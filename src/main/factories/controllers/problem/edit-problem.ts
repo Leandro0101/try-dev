@@ -1,5 +1,5 @@
 import { EditProblemController } from '@presentation/controllers'
-import { makeEditProblemValidations } from '../validations'
+import { makeEditProblemValidations } from '../../validations'
 import { makeEditProblemService } from '../../services'
 import { IController } from '@presentation/protocols'
 

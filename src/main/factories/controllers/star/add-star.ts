@@ -1,7 +1,7 @@
 import { IController } from '@presentation/protocols'
 import { AddStarController } from '@presentation/controllers'
 import { makeAddStarService } from '../../services'
-import { makeAddStarValidation } from '../validations'
+import { makeAddStarValidation } from '../../validations'
 import { AddLogErrorRepository } from '@infra/typeorm/repositories'
 import { LogControllerDecorator } from '../../../decorators/log'
 

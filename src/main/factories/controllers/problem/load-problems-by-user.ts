@@ -3,7 +3,7 @@ import { LogControllerDecorator } from '../../../decorators/log'
 import { LoadProblemsByUserController } from '@presentation/controllers'
 import { IController } from '@presentation/protocols'
 import { makeLoadProblemsByUserService } from '../../services'
-import { makeLoadProblemsByUserValidations } from '../validations'
+import { makeLoadProblemsByUserValidations } from '../../validations'
 
 export const makeLoadProblemsByUserController = (): IController => {
   const loadProblemsByUserController = new LoadProblemsByUserController(

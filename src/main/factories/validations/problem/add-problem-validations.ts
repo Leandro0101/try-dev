@@ -1,18 +1,14 @@
 import { IValidation } from '@presentation/protocols'
 import {
-  RequiredParamValidation,
   ValidationComposite
 } from '@validations/validators'
-import { makeUUIDValidation } from '.'
+import { makeUUIDValidation } from '..'
+import { makeRequiredParamValidation } from '../shared/required-param-validation'
 
 export const makeAddProblemValidation = (): ValidationComposite => {
-  const validations: IValidation[] = []
-
-  for (const field of ['title', 'description', 'userId']) {
-    validations.push(new RequiredParamValidation(field))
-  }
-
+  let validations: IValidation[] = []
+  const fields = ['title', 'description', 'userId']
+  validations = makeRequiredParamValidation(fields, validations)
   validations.push(makeUUIDValidation('userId'))
-
   return new ValidationComposite(validations)
 }
