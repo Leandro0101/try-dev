@@ -4,7 +4,7 @@ import { IAddStarRepository } from '@data/repositories'
 import { getCustomRepository } from 'typeorm'
 import { BaseStarRepository } from '../base-star-repository'
 
-import { StarModel } from '@data/models'
+import { StarModel } from '@/src/infra/typeorm/models'
 
 export class AddStarRepository implements IAddStarRepository {
   async execute (createStarData: ICreateStarDTO): Promise<IStarEntity> {

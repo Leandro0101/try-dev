@@ -3,7 +3,7 @@
 > ## Caso de sucesso
 
 1. ✅ Recebe uma requisição do tipo **GET** na rota **/api/users/:userId**
-2. ✅ Valida o formato de **id** fornecido (deve ser um uuid)
+2. ✅ Valida parâmetros
 3. ✅ Valida a existência do **id** fornecido
 4. ✅ Retorna os dados do usuário, exceto a senha
 

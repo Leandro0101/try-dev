@@ -26,7 +26,6 @@ export class MarkProblemAsResolvedController implements IController {
 
       return ok()
     } catch (error) {
-      console.log(error.stack)
       return serverError(error)
     }
   }

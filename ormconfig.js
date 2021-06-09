@@ -5,7 +5,7 @@ module.exports = {
   username: 'root',
   password: 'toor123',
   database: 'trydev',
-  entities: ['./src/data/models/**.ts'],
+  entities: ['./src/infra/typeorm/models/**.ts'],
   migrations: ['./src/infra/typeorm/migrations/**.ts'],
   cli: {
     migrationsDir: './src/infra/typeorm/migrations'

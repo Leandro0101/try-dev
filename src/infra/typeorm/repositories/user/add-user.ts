@@ -1,4 +1,4 @@
-import { UserModel } from '@data/models'
+import { UserModel } from '@/src/infra/typeorm/models'
 import { IAddUserRepository } from '@data/repositories'
 import { ICreateUserDTO } from '@data/dtos'
 import { IUserEntity } from '@domain/entities'

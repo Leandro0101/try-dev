@@ -1,7 +1,7 @@
 import { IProblemEntity, IStatusProblem } from '@domain/entities'
 import { IMarkProblemAsResolvedRepository } from '@data/repositories'
 import { getConnection } from 'typeorm'
-import { ProblemModel } from '@data/models'
+import { ProblemModel } from '@/src/infra/typeorm/models'
 
 export class MarkProblemAsResolvedRepository implements IMarkProblemAsResolvedRepository {
   async execute (problem: IProblemEntity): Promise<void> {
