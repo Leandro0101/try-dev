@@ -17,7 +17,7 @@ export class MarkProblemAsResolvedController implements IController {
       const response = await this.markProblemAsResolvedService.execute(problemId, userId)
       const { failValidations: fail } = response
       if (fail) {
-        if (fail.problemNotFound) {
+        if (fail.resourceNotFound) {
           return notFound(new ResourceNotFoundError('problem'))
         }
 

@@ -13,7 +13,7 @@ export class MostPopularSolutionsService implements IMostPopularSolutionsUseCase
     const failValidations: IFailValidations = {}
 
     if (!problem) {
-      failValidations.problemNotFound = true
+      failValidations.resourceNotFound = true
       return { failValidations }
     }
 

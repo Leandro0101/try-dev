@@ -13,7 +13,7 @@ export class RemoveSolutionService implements IRemoveSolutionUseCase {
     const solution = await this.loadSolutionById.execute(solutionId)
     const failValidations: IFailValidations = {}
     if (!solution) {
-      failValidations.solutionNotFound = true
+      failValidations.resourceNotFound = true
       return { failValidations }
     }
 

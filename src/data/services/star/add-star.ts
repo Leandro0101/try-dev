@@ -22,7 +22,7 @@ export class AddStarService implements IAddStarUseCase {
     const failValidations: IFailValidations = {}
 
     if (!solution || !user) {
-      failValidations.userOrSolutionNonexistent = true
+      failValidations.resourceNotFound = true
       return { failValidations }
     }
 

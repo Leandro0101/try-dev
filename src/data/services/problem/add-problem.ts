@@ -13,7 +13,7 @@ export class AddProblemService implements IAddProblemUseCase {
     const { title, description } = problemData.fields
     const failValidations: IFailValidations = {}
     if (!loadedUser) {
-      failValidations.userNotFound = true
+      failValidations.resourceNotFound = true
       return { failValidations }
     }
 

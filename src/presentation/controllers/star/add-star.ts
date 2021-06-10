@@ -21,7 +21,7 @@ export class AddStarController implements IController {
 
       const { content, failValidations: fail } = response
       if (fail) {
-        if (fail.userOrSolutionNonexistent) {
+        if (fail.resourceNotFound) {
           return notFound(new ResourceNotFoundError('solution ou user'))
         }
 

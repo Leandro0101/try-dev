@@ -20,7 +20,7 @@ export class AddSolutionService implements IAddSolutionUseCase {
 
     const failValidations: IFailValidations = {}
     if (!user || !problem) {
-      failValidations.userOrProblemNonexistent = true
+      failValidations.resourceNotFound = true
       return { failValidations }
     }
 

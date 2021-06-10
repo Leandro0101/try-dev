@@ -15,7 +15,7 @@ export class EditProblemService implements IEditProblemUseCase {
 
     const failValidations: IFailValidations = { }
     if (!problem) {
-      failValidations.problemNotFound = true
+      failValidations.resourceNotFound = true
       return { failValidations }
     }
 

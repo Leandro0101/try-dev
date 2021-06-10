@@ -13,7 +13,7 @@ export class LoadProblemsByUserService implements ILoadProblemsByUserUseCase {
     const user = await this.loadUserById.execute(userId)
     const failValidations: IFailValidations = {}
     if (!user) {
-      failValidations.userNotFound = true
+      failValidations.resourceNotFound = true
       return { failValidations }
     }
     const problems = await this.loadProblemsByUser.execute(userId, skip)

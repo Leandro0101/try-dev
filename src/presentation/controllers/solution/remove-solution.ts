@@ -19,7 +19,7 @@ export class RemoveSolutionController implements IController {
       const { failValidations: fail } = response
 
       if (fail) {
-        if (fail.solutionNotFound) return notFound(new ResourceNotFoundError('solution'))
+        if (fail.resourceNotFound) return notFound(new ResourceNotFoundError('solution'))
         if (fail.withoutPermission) return forbidden(new UnauthorizedError())
       }
 

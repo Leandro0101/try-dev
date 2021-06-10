@@ -13,7 +13,7 @@ export class MarkProblemAsResolvedService implements IMarkProblemAsResolvedUseCa
     const problem = await this.loadProblemByIdRepository.execute(problemId)
     const failValidations: IFailValidations = {}
     if (!problem) {
-      failValidations.problemNotFound = true
+      failValidations.resourceNotFound = true
       return { failValidations }
     }
 

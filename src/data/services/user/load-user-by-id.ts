@@ -11,7 +11,7 @@ export class LoadUserByIdService implements ILoadUserByIdUseCase {
 
     const failValidations: IFailValidations = {}
     if (!user) {
-      failValidations.userNotFound = true
+      failValidations.resourceNotFound = true
       return { failValidations }
     }
 

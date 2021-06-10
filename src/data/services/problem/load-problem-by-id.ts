@@ -9,7 +9,7 @@ export class LoadProblemByIdService implements ILoadProblemByIdUseCase {
     const problem = await this.loadProblemByIdRepository.execute(problemId)
     const failValidations: IFailValidations = {}
     if (!problem) {
-      failValidations.problemNotFound = true
+      failValidations.resourceNotFound = true
       return { failValidations }
     }
 

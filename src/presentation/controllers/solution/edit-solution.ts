@@ -23,7 +23,7 @@ export class EditSolutionController implements IController {
     const { content, failValidations: fail } = response
 
     if (fail) {
-      if (fail.solutionNotFound) return notFound(new ResourceNotFoundError('solution'))
+      if (fail.resourceNotFound) return notFound(new ResourceNotFoundError('solution'))
       if (fail.withoutPermission) return forbidden(new UnauthorizedError())
     }
 

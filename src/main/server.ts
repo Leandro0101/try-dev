@@ -9,7 +9,7 @@ connect().then(async () => {
   await seeds.get('users')()
   await seeds.get('problems')()
   await seeds.get('solutions')()
-  await seeds.get('stars')()
+  // await seeds.get('stars')()
 }).catch(error => {
   console.log('OCORREU Um ERROOR')
   console.log(error)

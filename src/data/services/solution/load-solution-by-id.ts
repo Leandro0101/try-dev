@@ -10,7 +10,7 @@ export class LoadSolutionByIdService implements ILoadSolutionByIdUseCase {
 
     const failValidations: IFailValidations = {}
     if (!solution) {
-      failValidations.solutionNotFound = true
+      failValidations.resourceNotFound = true
       return { failValidations }
     }
 
