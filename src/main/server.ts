@@ -1,7 +1,7 @@
 import 'reflect-metadata'
 import { connect } from '@infra/typeorm/helpers/typeorm'
-import app from './config/app'
 import { getConnection } from 'typeorm'
+import app from './config/app'
 import { seeds } from '../infra/typeorm/seeds'
 connect().then(async () => {
   app.listen(3000, () => console.log('RODAND10O'))

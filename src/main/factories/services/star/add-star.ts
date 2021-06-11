@@ -2,7 +2,7 @@ import { IAddStarUseCase } from '@domain/usecases'
 import { AddStarService } from '@data/services'
 import {
   IAddStarRepository, ILoadSolutionByIdRepository,
-  ILoadStarsFromUserRepository, ILoadUserByIdRepository
+  ILoadStarFromUserRepository, ILoadUserByIdRepository
 } from '@data/repositories'
 
 import {
@@ -14,6 +14,6 @@ export const makeAddStarService = (): IAddStarUseCase => {
   const addStar: IAddStarRepository = new AddStarRepository()
   const loadSolutionById: ILoadSolutionByIdRepository = new LoadSolutionByIdRepository()
   const loadUserById: ILoadUserByIdRepository = new LoadUserByIdRepository()
-  const loadStarFromUser: ILoadStarsFromUserRepository = new LoadStarsFromUserRepository()
+  const loadStarFromUser: ILoadStarFromUserRepository = new LoadStarsFromUserRepository()
   return new AddStarService(addStar, loadSolutionById, loadUserById, loadStarFromUser)
 }
