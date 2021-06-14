@@ -1,23 +1,5 @@
-export interface IMailDestination {
-  name: string
-  address: string
-}
+import { IMailData } from './mail-sender-protocols'
 
-export interface IMailMessageBody {
-  html: string
-  text: string
-}
-
-export interface IMailMessage {
-  subject: string
-  body: IMailMessageBody
-}
-
-export interface IMailData {
-  destination: IMailDestination
-  message: IMailMessage
-}
-
-export interface IEmailSender {
+export interface IMailSender {
   execute: (data: IMailData) => Promise<void>
 }

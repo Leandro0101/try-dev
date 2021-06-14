@@ -1,4 +1,4 @@
-import { IStatusUser, IUserEntity } from '@domain/entities'
+import { IUserStatus, IUserEntity } from '@domain/entities'
 import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, OneToMany } from 'typeorm'
 import { ProblemModel, SolutionModel, StarModel } from '.'
 
@@ -22,8 +22,8 @@ export class UserModel implements IUserEntity {
   @OneToMany(type => ProblemModel, problem => problem.user)
   problems: ProblemModel[]
 
-  @Column({ type: 'enum', enum: IStatusUser })
-  status: IStatusUser
+  @Column({ type: 'enum', enum: IUserStatus })
+  status: IUserStatus
 
   @OneToMany(type => StarModel, star => star.user)
   stars: StarModel[]

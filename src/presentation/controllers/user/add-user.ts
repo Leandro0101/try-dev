@@ -1,10 +1,16 @@
 import { IController, IHttpRequest, IHttpResponse, IValidation } from '../../protocols'
 import { badRequest, forbidden, ok, serverError } from '../../helpers/http'
 import { EmailAlreadyRegisterError } from '../../errors'
-import { IAddUserUseCase } from '@domain/usecases'
+import { IAddUserUseCase, ISendAccountVerificationEmailUseCase } from '@domain/usecases'
 
 export class AddUserController implements IController {
-  constructor (private readonly addUserService: IAddUserUseCase, private readonly validation: IValidation) {}
+  constructor (
+    private readonly addUserService: IAddUserUseCase,
+    private readonly validation: IValidation,
+    private readonly sendAccountVerificationEmail: ISendAccountVerificationEmailUseCase,
+    private readonly templatePath: string
+  ) { }
+
   async handle (httpRequest: IHttpRequest): Promise<IHttpResponse> {
     try {
       const error = this.validation.validate(httpRequest.body)
@@ -15,7 +21,14 @@ export class AddUserController implements IController {
       const { content, failValidations: fail } = response
 
       if (fail) return forbidden(new EmailAlreadyRegisterError(email))
-
+      await this.sendAccountVerificationEmail.execute({
+        user: {
+          id: content.id,
+          email,
+          name
+        },
+        templatePath: this.templatePath
+      })
       return ok(content)
     } catch (error) {
       return serverError(error)

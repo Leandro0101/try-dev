@@ -1,7 +1,7 @@
-import { IEmailSender, IMailData } from '@data/protocols'
+import { IMailData, IMailSender } from '@data/protocols'
 import SES from 'aws-sdk/clients/ses'
 
-export class SESMailSenderAdapter implements IEmailSender {
+export class SESMailSenderAdapter implements IMailSender {
   private readonly client: SES
   constructor () {
     this.client = new SES({ region: 'us-east-1' })
@@ -22,8 +22,8 @@ export class SESMailSenderAdapter implements IEmailSender {
           Data: subject
         },
         Body: {
-          Text: {
-            Data: body.text
+          Html: {
+            Data: body.html
           }
         }
       },

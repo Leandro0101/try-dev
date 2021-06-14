@@ -4,7 +4,7 @@ import { forbidden, ok } from '../helpers/http'
 import { IHttpRequest, IHttpResponse, IMiddleware } from '../protocols'
 
 export class AuthMiddleware implements IMiddleware {
-  constructor (private readonly decrypter: IDecrypter) {}
+  constructor (private readonly decrypter: IDecrypter) { }
   async handle (httpRequest: IHttpRequest): Promise<IHttpResponse> {
     const authHeader = httpRequest.headers.authorization
     if (!authHeader) return forbidden(new AccessDeniedError())

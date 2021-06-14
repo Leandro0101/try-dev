@@ -1,7 +1,9 @@
 import { IProblemEntity, ISolutionEntity, IStarEntity } from '.'
 
-export enum IStatusUser {
-  ACTIVE = 'active', INACTIVE = 'inactive',
+export enum IUserStatus {
+  ACTIVE = 'active',
+  INACTIVE = 'inactive',
+  PENDING = 'pending'
 }
 
 export interface IUserEntity {
@@ -12,6 +14,6 @@ export interface IUserEntity {
   solutions: ISolutionEntity[]
   problems: IProblemEntity[]
   stars: IStarEntity[]
-  status: IStatusUser
+  status: IUserStatus
   createdAt: Date
 }

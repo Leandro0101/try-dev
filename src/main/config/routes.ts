@@ -9,7 +9,6 @@ import {
   mostPopularSolutionsRoute,
   authenticationRoute
 } from '../routes'
-import { emailRoute } from '../routes/user/email-test'
 
 export default (app: Express): void => {
   const routes = Router()
@@ -29,5 +28,4 @@ export default (app: Express): void => {
   mostPopularProblemsRoute(routes)
   mostPopularSolutionsRoute(routes)
   authenticationRoute(routes)
-  emailRoute(routes)
 }

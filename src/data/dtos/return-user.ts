@@ -1,9 +1,9 @@
-import { IStatusUser } from '../../domain/entities'
+import { IUserStatus } from '../../domain/entities'
 
 export interface IReturnUserDTO {
   id: string
   name: string
   email: string
-  status: IStatusUser
+  status: IUserStatus
   createdAt: Date
 }
