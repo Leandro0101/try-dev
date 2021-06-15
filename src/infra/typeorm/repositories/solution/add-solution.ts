@@ -3,7 +3,7 @@ import { ISolutionEntity } from '@domain/entities'
 import { IAddSolutionRepository } from '@data/repositories'
 import { getCustomRepository } from 'typeorm'
 import { BaseSolutionRepository } from '../base-solution-repository'
-import { SolutionModel } from '@/src/infra/typeorm/models'
+import { SolutionModel } from '@infra/typeorm/models'
 
 export class AddSolutionRepository implements IAddSolutionRepository {
   async execute (createSolutionData: ICreateSolutionDTO): Promise<ISolutionEntity> {

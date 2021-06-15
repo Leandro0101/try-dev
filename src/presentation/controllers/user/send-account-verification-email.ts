@@ -1,4 +1,4 @@
-import { IUserStatus } from '@/src/domain/entities'
+import { IUserStatus } from '@domain/entities'
 import { UnauthorizedError } from '../../errors'
 import { badRequest, forbidden, ok } from '../../helpers/http'
 import { IController, IHttpRequest, IHttpResponse, IValidation } from '../../protocols'

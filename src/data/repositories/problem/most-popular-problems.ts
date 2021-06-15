@@ -1,4 +1,4 @@
-import { IParamsToLoading } from '@/src/domain/usecases'
+import { IParamsToLoading } from '@domain/usecases'
 import { IProblemEntity } from '@domain/entities'
 
 export interface IMostPopularProblemsRepository {

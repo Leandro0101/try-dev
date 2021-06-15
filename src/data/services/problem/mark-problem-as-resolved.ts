@@ -1,7 +1,7 @@
 import { ILoadProblemByIdRepository, IMarkProblemAsResolvedRepository } from '../../repositories'
 import { IMarkProblemAsResolvedUseCase } from '@domain/usecases'
 import { IFailValidations, IUseCasesReturn } from '../../protocols'
-import { IStatusProblem } from '@/src/domain/entities'
+import { IStatusProblem } from '@domain/entities'
 
 export class MarkProblemAsResolvedService implements IMarkProblemAsResolvedUseCase {
   constructor (

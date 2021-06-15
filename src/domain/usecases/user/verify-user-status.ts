@@ -1,4 +1,4 @@
-import { IUseCasesReturn } from '@/src/data/protocols'
+import { IUseCasesReturn } from '@data/protocols'
 import { IUserStatus } from '../../entities'
 
 export interface IVerifyUserStatusUseCase {

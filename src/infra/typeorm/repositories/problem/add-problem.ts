@@ -1,4 +1,4 @@
-import { ProblemModel } from '@/src/infra/typeorm/models'
+import { ProblemModel } from '@infra/typeorm/models'
 import { IAddProblemRepository } from '@data/repositories'
 import { ICreateProblemDTO } from '@data/dtos'
 import { IProblemEntity } from '@domain/entities'

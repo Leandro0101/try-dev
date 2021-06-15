@@ -1,4 +1,4 @@
-import { ProblemModel } from '@/src/infra/typeorm/models'
+import { ProblemModel } from '@infra/typeorm/models'
 import { IEditProblemRepository } from '@data/repositories'
 import { IProblemEntity } from '@domain/entities'
 import { getConnection } from 'typeorm'

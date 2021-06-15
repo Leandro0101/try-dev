@@ -1,5 +1,5 @@
 import { IAddLogErrorRepository } from '@data/repositories'
-import { LogModel } from '@/src/infra/typeorm/models'
+import { LogModel } from '@infra/typeorm/models'
 import { BaseLogRepository } from '../base-log-repository'
 import { getCustomRepository } from 'typeorm'
 

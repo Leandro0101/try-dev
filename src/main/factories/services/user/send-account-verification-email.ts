@@ -4,7 +4,7 @@ import { HandleBarsAdapter } from '@infra/mail/handle-bars-adapter'
 import { SendAccountVerificationEmailService } from '@data/services'
 import { ISendAccountVerificationEmailUseCase } from '@domain/usecases'
 import { SESMailSenderAdapter } from '@infra/mail/SES/SES-mail-sender-adapter'
-import { LoadUserByIdRepository } from '@/src/infra/typeorm/repositories'
+import { LoadUserByIdRepository } from '@infra/typeorm/repositories'
 
 export const makeSendAccountVerificationEmailService = (): ISendAccountVerificationEmailUseCase => {
   const tokenGenerator: ITokenGenerator = new JWTAdapter()
