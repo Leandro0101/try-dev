@@ -1,3 +1,5 @@
+import { IUseCasesReturn } from '@data/protocols'
+
 interface IUserData {
   id: string
   email: string
@@ -10,5 +12,5 @@ export interface IConfirmationEmailData {
 }
 
 export interface ISendAccountVerificationEmailUseCase {
-  execute: (data: IConfirmationEmailData) => Promise<void>
+  execute: (data: IConfirmationEmailData) => Promise<IUseCasesReturn<void>>
 }

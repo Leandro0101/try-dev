@@ -27,7 +27,10 @@ export class AuthMiddleware implements IMiddleware {
     const response = await this.verifyUserStatus.execute(
       userId, IUserStatus.ACTIVE
     )
-    if (response.failValidations) return forbidden(new AccessDeniedError())
+
+    if (response.failValidations) {
+      return forbidden(new AccessDeniedError())
+    }
     return ok({ tokenValue })
   }
 }
