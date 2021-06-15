@@ -8,7 +8,8 @@ import {
   mostPopularProblemsRoute,
   mostPopularSolutionsRoute,
   authenticationRoute,
-  verificationRoute
+  verificationRoute,
+  verificationEmailRoute
 } from '../routes'
 
 export default (app: Express): void => {
@@ -30,4 +31,5 @@ export default (app: Express): void => {
   mostPopularSolutionsRoute(routes)
   authenticationRoute(routes)
   verificationRoute(routes)
+  verificationEmailRoute(routes)
 }
