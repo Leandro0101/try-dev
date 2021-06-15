@@ -1,3 +1,9 @@
+export interface ITokenData {
+  userId: string
+  expiration: number
+  key: string
+}
+
 export interface ITokenGenerator {
-  generate: (userId: string) => Promise<string>
+  generate: (tokenData: ITokenData) => Promise<string>
 }

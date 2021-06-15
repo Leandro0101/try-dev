@@ -1,17 +1,18 @@
 import { IConfirmationEmailData, ISendAccountVerificationEmailUseCase } from '@domain/usecases'
-import { IMailSender, ITemplateGenerate, ITokenGenerator } from '../../protocols'
+import { IMailSender, ITemplateGenerate, ITokenData, ITokenGenerator } from '../../protocols'
 
 export class SendAccountVerificationEmailService implements ISendAccountVerificationEmailUseCase {
   constructor (
     private readonly tokenGenerator: ITokenGenerator,
     private readonly templateGenerate: ITemplateGenerate,
-    private readonly mailSender: IMailSender
+    private readonly mailSender: IMailSender,
+    private readonly tokenData: Omit<ITokenData, 'userId'>
   ) {}
 
   async execute (data: IConfirmationEmailData): Promise<void> {
     const { name, email, id } = data.user
-
-    const token = await this.tokenGenerator.generate(id)
+    const tokenDataWithUserId = Object.assign(this.tokenData, { userId: id })
+    const token = await this.tokenGenerator.generate(tokenDataWithUserId)
     const html = await this.templateGenerate.execute({
       path: data.templatePath,
       variables: { name, token }

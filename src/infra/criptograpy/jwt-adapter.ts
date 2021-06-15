@@ -1,17 +1,17 @@
 import { IDecrypter } from '@data/protocols/criptograpy/decrypter'
-import { ITokenGenerator } from '@data/protocols'
+import { ITokenData, ITokenGenerator } from '@data/protocols'
 import jwt from 'jsonwebtoken'
 
 export class JWTAdapter implements ITokenGenerator, IDecrypter {
-  async generate (userId: string): Promise<string> {
-    const token = jwt.sign({ userId }, 'EiOiJ0ZXN0ZSIsImlhdCI6MTYxOTMwOTIzMiwiZ', { expiresIn: 4000 })
-
+  async generate (tokenData: ITokenData): Promise<string> {
+    const { userId, key, expiration } = tokenData
+    const token = jwt.sign({ userId }, key, { expiresIn: expiration })
     return token
   }
 
-  async decrypt (value: string): Promise<string> {
+  async decrypt (value: string, key: string): Promise<string> {
     try {
-      const tokenValue = Object(await jwt.verify(value, 'EiOiJ0ZXN0ZSIsImlhdCI6MTYxOTMwOTIzMiwiZ'))
+      const tokenValue = Object(await jwt.verify(value, key))
       return tokenValue
     } catch (error) {
       return null

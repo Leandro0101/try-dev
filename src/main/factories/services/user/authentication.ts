@@ -10,6 +10,10 @@ export const makeAuthenticationService = (): IAuthenticationUseCase => {
   const loadUserByEmail: ILoadUserByEmailRepository = new LoadUserByEmailRepository()
   const hashComparator: IHashComparator = new BcryptAdapter()
   const tokenGenerator: ITokenGenerator = new JWTAdapter()
-
-  return new AuthenticationService(loadUserByEmail, hashComparator, tokenGenerator)
+  const twoDays = 60 * 60 * 48
+  const tokenData = {
+    expiration: twoDays,
+    key: process.env.AUTHENTICATION_TOKEN_KEY
+  }
+  return new AuthenticationService(loadUserByEmail, hashComparator, tokenGenerator, tokenData)
 }

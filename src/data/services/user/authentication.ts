@@ -1,7 +1,7 @@
 import { IAuthData, IAuthenticationUseCase } from '@domain/usecases'
 import {
   IFailValidations, IHashComparator,
-  ITokenGenerator, IUseCasesReturn
+  ITokenGenerator, IUseCasesReturn, ITokenData
 } from '../../protocols'
 import { ILoadUserByEmailRepository } from '../../repositories'
 
@@ -9,7 +9,8 @@ export class AuthenticationService implements IAuthenticationUseCase {
   constructor (
     private readonly loadUserByEmail: ILoadUserByEmailRepository,
     private readonly hashComparator: IHashComparator,
-    private readonly tokenGenerator: ITokenGenerator
+    private readonly tokenGenerator: ITokenGenerator,
+    private readonly tokenData: Omit<ITokenData, 'userId'>
   ) {
 
   }
@@ -21,8 +22,8 @@ export class AuthenticationService implements IAuthenticationUseCase {
     if (user) {
       const isValid = await this.hashComparator.compare(password, user.password)
       if (isValid) {
-        const token = await this.tokenGenerator.generate(user.id)
-
+        const tokenDataWithUserId = Object.assign(this.tokenData, { userId: user.id })
+        const token = await this.tokenGenerator.generate(tokenDataWithUserId)
         return { content: token }
       }
     }
