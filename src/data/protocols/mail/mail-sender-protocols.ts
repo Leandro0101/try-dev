@@ -1,6 +1,6 @@
 export interface IMailDestination {
-  name: string
-  address: string
+  name?: string
+  addresses: string[]
 }
 
 export interface IMailMessageBody {
@@ -9,11 +9,18 @@ export interface IMailMessageBody {
 }
 
 export interface IMailMessage {
-  subject: string
-  body: IMailMessageBody
+  subject?: string
+  body?: IMailMessageBody
+}
+
+export interface ITemplate {
+  name: string
+  templateData: Object | string
 }
 
 export interface IMailData {
+  source: string
   destination: IMailDestination
-  message: IMailMessage
+  message?: IMailMessage
+  template?: ITemplate
 }

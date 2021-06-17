@@ -1,5 +1,5 @@
 import { IMailData, IMailSender } from '@data/protocols'
-import SES from 'aws-sdk/clients/ses'
+import SES from 'aws-sdk/clients/sesv2'
 
 export class SESMailSenderAdapter implements IMailSender {
   private readonly client: SES
@@ -8,26 +8,19 @@ export class SESMailSenderAdapter implements IMailSender {
   }
 
   async execute (data: IMailData): Promise<void> {
-    const { name, address } = data.destination
-    const { body, subject } = data.message
+    const { addresses } = data.destination
+    const { name, templateData } = data.template
     await this.client.sendEmail({
-      Source: 'Trydev <no-reply@trydev.com.br>',
+      FromEmailAddress: data.source,
       Destination: {
-        ToAddresses: [
-          `${name} <${address}>`
-        ]
+        ToAddresses: addresses
       },
-      Message: {
-        Subject: {
-          Data: subject
-        },
-        Body: {
-          Html: {
-            Data: body.html
-          }
+      Content: {
+        Template: {
+          TemplateData: JSON.stringify(templateData),
+          TemplateName: name
         }
-      },
-      ConfigurationSetName: 'trydev-handler'
+      }
     }).promise()
   }
 }
