@@ -4,8 +4,9 @@ WORKDIR /home/trydev_api
 
 COPY package.json .
 COPY yarn.lock .
-COPY dist .
 
-RUN yarn install --prod
+RUN yarn install
 
-CMD yarn start
+COPY . .
+
+CMD yarn dev

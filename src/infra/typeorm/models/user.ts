@@ -3,7 +3,7 @@ import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, OneToMany } f
 import { ProblemModel, SolutionModel, StarModel } from '.'
 
 @Entity('users')
-export class UserModel implements IUserEntity {
+class UserModel implements IUserEntity {
   @PrimaryGeneratedColumn('uuid')
   readonly id: string
 
@@ -35,3 +35,5 @@ export class UserModel implements IUserEntity {
     Object.assign(this, props)
   }
 }
+
+export { UserModel }

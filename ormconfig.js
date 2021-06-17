@@ -1,3 +1,5 @@
+const environment = process.env.NODE_ENV === 'development'
+const rootDir = environment ? 'src' : 'dist'
 module.exports = {
   type: 'postgres',
   host: 'database',
@@ -5,9 +7,9 @@ module.exports = {
   username: 'root',
   password: 'toor123',
   database: 'trydev',
-  entities: ['./src/infra/typeorm/models/**.ts'],
-  migrations: ['./src/infra/typeorm/migrations/**.ts'],
+  entities: [`${rootDir}/infra/typeorm/models/*{.js,.ts}`],
+  migrations: [`${rootDir}/infra/typeorm/migrations/*{.js,.ts}`],
   cli: {
-    migrationsDir: './src/infra/typeorm/migrations'
+    migrationsDir: `${rootDir}/infra/typeorm/migrations`
   }
 }
