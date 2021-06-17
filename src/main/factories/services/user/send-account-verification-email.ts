@@ -16,9 +16,8 @@ export const makeSendAccountVerificationEmailService = (): ISendAccountVerificat
   const service = new SendAccountVerificationEmailService(
     tokenGenerator,
     mailSender,
-    tokenData,
     new LoadUserByIdRepository(),
-    'email-confirmation'
+    { tokenData, templateName: 'email-confirmation' }
   )
   return service
 }
