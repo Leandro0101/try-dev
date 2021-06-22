@@ -4,6 +4,7 @@ WORKDIR /home/trydev_api
 COPY package.json ./
 COPY yarn.lock ./
 COPY ormconfig.js ./
+COPY .env ./
 RUN yarn install
 COPY ./dist ./dist
 
