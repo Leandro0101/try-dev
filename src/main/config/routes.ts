@@ -1,35 +1,12 @@
 import { Express, Router } from 'express'
-import {
-  loadUserByIdRoute, loadProblemsByUserRoute, removeSolutionRoute,
-  editSolutionRoute, loadProblemByIdRoute, loadSolutionByIdRoute,
-  addUserRoute, addProblemRoute, addSolutionRoute,
-  addStarRoute, markProblemAsResolvedRoute,
-  editProblemRoute,
-  mostPopularProblemsRoute,
-  mostPopularSolutionsRoute,
-  authenticationRoute,
-  verificationRoute,
-  verificationEmailRoute
-} from '../routes'
+import { readdirSync } from 'fs'
+import { join } from 'path'
 
 export default (app: Express): void => {
-  const routes = Router()
-  app.use('/api', routes)
-  addUserRoute(routes)
-  addProblemRoute(routes)
-  addSolutionRoute(routes)
-  loadProblemByIdRoute(routes)
-  loadSolutionByIdRoute(routes)
-  removeSolutionRoute(routes)
-  addStarRoute(routes)
-  loadUserByIdRoute(routes)
-  loadProblemsByUserRoute(routes)
-  markProblemAsResolvedRoute(routes)
-  editSolutionRoute(routes)
-  editProblemRoute(routes)
-  mostPopularProblemsRoute(routes)
-  mostPopularSolutionsRoute(routes)
-  authenticationRoute(routes)
-  verificationRoute(routes)
-  verificationEmailRoute(routes)
+  const router = Router()
+  const path = join(__dirname, '..', 'routes')
+  app.use('/api', router)
+  readdirSync(path).map(async file => {
+    (await import(`../routes/${file}`)).default(router)
+  })
 }
