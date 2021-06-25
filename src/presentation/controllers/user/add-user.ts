@@ -2,7 +2,8 @@ import { IController, IHttpRequest, IHttpResponse, IValidation } from '../../pro
 import { badRequest, forbidden, ok, serverError } from '../../helpers/http'
 import { EmailAlreadyRegisterError } from '../../errors'
 import { IAddUserUseCase, ISendAccountVerificationEmailUseCase } from '@domain/usecases'
-import Queue from '../../../infra/redis/queue'
+import { IQueueData, queueSystem } from '@infra/job-queues/bull'
+
 export class AddUserController implements IController {
   constructor (
     private readonly addUserService: IAddUserUseCase,
@@ -21,24 +22,19 @@ export class AddUserController implements IController {
       const { content, failValidations: fail } = response
 
       if (fail) return forbidden(new EmailAlreadyRegisterError(email))
-      // await this.sendAccountVerificationEmail.execute({
-      //   user: {
-      //     id: content.id,
-      //     email,
-      //     name
-      //   },
-      //   templatePath: this.templatePath
-      // })
-      await Queue.add({
-        data: {
+      console.log(this.sendAccountVerificationEmail.execute)
+      await queueSystem.add<IQueueData>({
+        confirmationEmailData: {
           user: {
             id: content.id,
             email,
             name
-          }
+          },
+          templatePath: ''
         },
         sendAccountVerificationEmail: this.sendAccountVerificationEmail
       })
+
       return ok(content)
     } catch (error) {
       return serverError(error)
