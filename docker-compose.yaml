@@ -23,6 +23,15 @@ services:
       POSTGRES_PASSWORD: "toor123"
     ports:
        - "5432:5432"
+  queue:
+    build: .
+    volumes:
+      - .:/home/trydev_api
+    depends_on:
+      - database
+      - redis
+    container_name: queue
+    command: yarn dev:queue
   redis:
     image: redis
     ports:

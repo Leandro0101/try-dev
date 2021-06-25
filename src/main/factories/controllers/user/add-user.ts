@@ -5,10 +5,11 @@ import { makeAddUserService, makeSendAccountVerificationEmailService } from '../
 import { LogControllerDecorator } from '../../../decorators/log'
 import { AddLogErrorRepository } from '@infra/typeorm/repositories'
 import { resolve } from 'path'
+import { queueSystem } from '@/src/infra/queue-system-bull/bull'
 
 export const makeAddUserController = (): IController => {
   const emailTemplatePath = resolve(__dirname, '..', '..', '..', '..', '..', 'templates', 'email-confirmation.hbs')
-  const addUserController = new AddUserController(makeAddUserService(), makeAddUserValidations(), makeSendAccountVerificationEmailService(), emailTemplatePath)
+  const addUserController = new AddUserController(makeAddUserService(), makeAddUserValidations(), makeSendAccountVerificationEmailService(), emailTemplatePath, queueSystem)
 
   return new LogControllerDecorator(addUserController, new AddLogErrorRepository())
 }

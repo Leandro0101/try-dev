@@ -1,4 +1,6 @@
+import { queueSystem } from '@/src/infra/queue-system-bull/bull'
 import { IConfirmationEmailData, ISendAccountVerificationEmailUseCase } from '@domain/usecases'
+import { ICreateUserDTO } from '../../dtos'
 import { IFailValidations, IMailData, IMailSender, ITokenData, ITokenGenerator, IUseCasesReturn } from '../../protocols'
 import { ILoadUserByIdRepository } from '../../repositories'
 
@@ -34,6 +36,7 @@ export class SendAccountVerificationEmailService implements ISendAccountVerifica
         templateData: { token, timeExpiration: tokenData.expiration / 60 }
       }
     }
+
     await this.mailSender.execute(emailData)
 
     return { }
