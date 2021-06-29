@@ -19,15 +19,16 @@ export class AddUserController implements IController {
       if (error) return badRequest(error)
       const { name, email, password } = httpRequest.body
 
-      const response = await this.addUserService.execute({ name, email, password })
+      const response = await this.addUserService.execute({
+        name, email, password
+      })
       const { content, failValidations: fail } = response
 
       if (fail) return forbidden(new EmailAlreadyRegisterError(email))
       await this.queueSystem.add<IConfirmationEmailData>({
-        user: {
-          id: content.id, email, name
-        },
-        templatePath: ''
+        id: content.id,
+        email,
+        name
       }, 'sendAccountEmailVerificationQueue')
 
       return ok(content)

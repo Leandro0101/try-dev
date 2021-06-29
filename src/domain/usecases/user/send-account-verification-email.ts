@@ -1,14 +1,9 @@
 import { IUseCasesReturn } from '@data/protocols'
 
-interface IUserData {
+export type IConfirmationEmailData = {
   id: string
   email: string
   name: string
-}
-
-export interface IConfirmationEmailData {
-  user: IUserData
-  templatePath: string
 }
 
 export interface ISendAccountVerificationEmailUseCase {

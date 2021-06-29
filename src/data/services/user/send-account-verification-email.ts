@@ -1,6 +1,4 @@
-import { queueSystem } from '@/src/infra/queue-system-bull/bull'
 import { IConfirmationEmailData, ISendAccountVerificationEmailUseCase } from '@domain/usecases'
-import { ICreateUserDTO } from '../../dtos'
 import { IFailValidations, IMailData, IMailSender, ITokenData, ITokenGenerator, IUseCasesReturn } from '../../protocols'
 import { ILoadUserByIdRepository } from '../../repositories'
 
@@ -18,7 +16,7 @@ export class SendAccountVerificationEmailService implements ISendAccountVerifica
   ) { }
 
   async execute (data: IConfirmationEmailData): Promise<IUseCasesReturn<void>> {
-    const { email, id } = data.user
+    const { email, id } = data
     const { tokenData, templateName } = this.templateVariables
     const user = await this.loadUserById.execute(id)
     const failValidations: IFailValidations = {}
