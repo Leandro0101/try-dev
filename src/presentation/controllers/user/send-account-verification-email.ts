@@ -34,10 +34,7 @@ export class SendAccountVerificationEmailController implements IController {
     if (failVerify) return forbidden(new UnauthorizedError())
 
     const { id, email, name } = user
-    await this.sendAccountVerificationEmail.execute({
-      user: { id, email, name },
-      templatePath: this.templatePath
-    })
+    await this.sendAccountVerificationEmail.execute({ id, email, name })
     return ok()
   }
 }

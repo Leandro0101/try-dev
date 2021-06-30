@@ -3,8 +3,9 @@ import { adaptMiddleware } from '../adapters/express-middleware'
 import { adaptRoute } from '../adapters/express-router'
 import {
   makeAddUserController, makeAuthenticationController,
-  makeLoadUserByIdController, makeSendAccountVerificationEmailController
+  makeLoadUserByIdController, makeSendAccountVerificationEmailController, makeSendPasswordResetEmailController
 } from '../factories/controllers'
+import { makeRedefinePasswordController } from '../factories/controllers/user/redefine-password'
 
 import { makeVerifyEmailController } from '../factories/controllers/user/verify-email'
 import { makeAuthMiddleware } from '../factories/middlewares/auth'
@@ -15,4 +16,7 @@ export default (router: Router): void => {
   router.get('/users/:id', adaptRoute(makeLoadUserByIdController()))
   router.post('/verification-email', adaptMiddleware(makeAuthMiddleware('PENDING')), adaptRoute(makeSendAccountVerificationEmailController()))
   router.get('/verification/:token', adaptRoute(makeVerifyEmailController()))
+  router.patch('/redefine-password/:token', adaptRoute(makeRedefinePasswordController()))
+  router.patch('/redefine-password/:token', adaptRoute(makeRedefinePasswordController()))
+  router.post('/password-reset/:email', adaptRoute(makeSendPasswordResetEmailController()))
 }

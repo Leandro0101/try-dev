@@ -4,8 +4,8 @@ import jwt from 'jsonwebtoken'
 
 export class JWTAdapter implements ITokenGenerator, IDecrypter {
   async generate (tokenData: ITokenData): Promise<string> {
-    const { userId, key, expiration } = tokenData
-    const token = jwt.sign({ userId }, key, { expiresIn: expiration })
+    const { userId, userEmail, key, expiration } = tokenData
+    const token = jwt.sign({ userId, userEmail }, key, { expiresIn: expiration })
     return token
   }
 

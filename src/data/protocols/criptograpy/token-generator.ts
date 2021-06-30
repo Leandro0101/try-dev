@@ -1,5 +1,6 @@
 export interface ITokenData {
-  userId: string
+  userEmail?: string
+  userId?: string
   expiration: number
   key: string
 }
