@@ -5,9 +5,9 @@ import {
   makeAddUserController, makeAuthenticationController,
   makeLoadUserByIdController, makeSendAccountVerificationEmailController, makeSendPasswordResetEmailController
 } from '../factories/controllers'
-import { makeRedefinePasswordController } from '../factories/controllers/user/redefine-password'
+import { makeRedefinePasswordController } from '../factories/controllers/account/login/redefine-password'
 
-import { makeVerifyEmailController } from '../factories/controllers/user/verify-email'
+import { makeVerifyEmailController } from '../factories/controllers/account/login/verify-email'
 import { makeAuthMiddleware } from '../factories/middlewares/auth'
 
 export default (router: Router): void => {

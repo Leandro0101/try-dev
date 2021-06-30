@@ -1,6 +1,6 @@
 import { ISolutionEntity } from '@domain/entities'
 import { IRemoveSolutionRepository } from '@data/repositories'
-import { BaseSolutionRepository } from '../base-solution-repository'
+import { BaseSolutionRepository } from '../base-repositories/base-solution-repository'
 import { getCustomRepository } from 'typeorm'
 
 export class RemoveSolutionRepository implements IRemoveSolutionRepository {

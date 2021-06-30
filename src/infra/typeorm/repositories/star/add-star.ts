@@ -2,7 +2,7 @@ import { ICreateStarDTO } from '@data/dtos'
 import { IStarEntity } from '@domain/entities'
 import { IAddStarRepository } from '@data/repositories'
 import { getCustomRepository } from 'typeorm'
-import { BaseStarRepository } from '../base-star-repository'
+import { BaseStarRepository } from '../base-repositories/base-star-repository'
 
 import { StarModel } from '@infra/typeorm/models'
 

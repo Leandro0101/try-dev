@@ -1,6 +1,6 @@
 import { IAddLogErrorRepository } from '@data/repositories'
 import { LogModel } from '@infra/typeorm/models'
-import { BaseLogRepository } from '../base-log-repository'
+import { BaseLogRepository } from '../base-repositories/base-log-repository'
 import { getCustomRepository } from 'typeorm'
 
 export class AddLogErrorRepository implements IAddLogErrorRepository {

@@ -1,9 +1,9 @@
 import { getCustomRepository } from 'typeorm'
-import { BaseUserRepository } from '../repositories/base-user-repository'
-import { BaseProblemRepository } from '../repositories/base-problem-repository'
+import { BaseUserRepository } from '../repositories/base-repositories/base-user-repository'
+import { BaseProblemRepository } from '../repositories/base-repositories/base-problem-repository'
 import { problemsFactory, solutionsFactory, starsFactory, usersFactory } from './factories'
-import { BaseSolutionRepository } from '../repositories/base-solution-repository'
-import { BaseStarRepository } from '../repositories/base-star-repository'
+import { BaseSolutionRepository } from '../repositories/base-repositories/base-solution-repository'
+import { BaseStarRepository } from '../repositories/base-repositories/base-star-repository'
 
 export const seeds = new Map()
 

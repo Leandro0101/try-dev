@@ -2,7 +2,7 @@ import { ICreateSolutionDTO } from '@data/dtos'
 import { ISolutionEntity } from '@domain/entities'
 import { IAddSolutionRepository } from '@data/repositories'
 import { getCustomRepository } from 'typeorm'
-import { BaseSolutionRepository } from '../base-solution-repository'
+import { BaseSolutionRepository } from '../base-repositories/base-solution-repository'
 import { SolutionModel } from '@infra/typeorm/models'
 
 export class AddSolutionRepository implements IAddSolutionRepository {

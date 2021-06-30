@@ -2,9 +2,9 @@ import { ICreateProblemDTO, ICreateSolutionDTO, ICreateStarDTO, ICreateUserDTO }
 import { LoadUserByEmailRepository } from '../repositories'
 import bcrypt from 'bcrypt'
 import { getCustomRepository } from 'typeorm'
-import { BaseProblemRepository } from '../repositories/base-problem-repository'
-import { BaseUserRepository } from '../repositories/base-user-repository'
-import { BaseSolutionRepository } from '../repositories/base-solution-repository'
+import { BaseProblemRepository } from '../repositories/base-repositories/base-problem-repository'
+import { BaseUserRepository } from '../repositories/base-repositories/base-user-repository'
+import { BaseSolutionRepository } from '../repositories/base-repositories/base-solution-repository'
 
 const randomNumber = (limit: number): number => {
   return Math.floor(Math.random() * limit)

@@ -1,7 +1,7 @@
 import { ILoadSolutionByIdRepository } from '@data/repositories'
 import { ISolutionEntity } from '@domain/entities'
 import { getCustomRepository } from 'typeorm'
-import { BaseSolutionRepository } from '../base-solution-repository'
+import { BaseSolutionRepository } from '../base-repositories/base-solution-repository'
 
 export class LoadSolutionByIdRepository implements ILoadSolutionByIdRepository {
   async execute (id: string): Promise<ISolutionEntity> {

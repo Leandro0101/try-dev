@@ -1,7 +1,7 @@
 import { IProblemEntity } from '@domain/entities'
 import { ILoadProblemsByUserRepository } from '@data/repositories'
 import { getCustomRepository } from 'typeorm'
-import { BaseProblemRepository } from '../base-problem-repository'
+import { BaseProblemRepository } from '../base-repositories/base-problem-repository'
 
 export class LoadProblemsByUserRepository implements ILoadProblemsByUserRepository {
   async execute (userId: string, skip: number): Promise<IProblemEntity[]> {

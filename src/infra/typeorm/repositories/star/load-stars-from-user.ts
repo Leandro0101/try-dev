@@ -1,6 +1,6 @@
 import { IStarEntity } from '@domain/entities'
 import { ILoadStarFromUserRepository } from '@data/repositories'
-import { BaseStarRepository } from '../base-star-repository'
+import { BaseStarRepository } from '../base-repositories/base-star-repository'
 import { getCustomRepository } from 'typeorm'
 
 export class LoadStarsFromUserRepository implements ILoadStarFromUserRepository {

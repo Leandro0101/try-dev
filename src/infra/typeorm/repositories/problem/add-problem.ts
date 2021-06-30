@@ -3,7 +3,7 @@ import { IAddProblemRepository } from '@data/repositories'
 import { ICreateProblemDTO } from '@data/dtos'
 import { IProblemEntity } from '@domain/entities'
 import { getCustomRepository } from 'typeorm'
-import { BaseProblemRepository } from '../base-problem-repository'
+import { BaseProblemRepository } from '../base-repositories/base-problem-repository'
 
 export class AddProblemRepository implements IAddProblemRepository {
   async execute (problemData: ICreateProblemDTO): Promise<IProblemEntity> {
