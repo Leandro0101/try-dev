@@ -1,6 +1,6 @@
 {
   "name": "trydev",
-  "version": "2.0.7",
+  "version": "2.1.0",
   "main": "index.js",
   "license": "MIT",
   "scripts": {
@@ -15,6 +15,7 @@
     "migrations:create": "docker exec trydev_api yarn typeorm migration:create -n",
     "migrations:revert": "docker exec trydev_api yarn typeorm migration:revert"
   },
+  
   "devDependencies": {
     "@babel/cli": "^7.14.5",
     "@babel/core": "7.14.6",
