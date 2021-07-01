@@ -3,6 +3,7 @@ import { connect } from '@infra/typeorm/helpers/typeorm'
 import { getConnection } from 'typeorm'
 import app from './config/app'
 import { seeds } from '../infra/typeorm/seeds'
+
 connect().then(async () => {
   app.listen(3000, () => console.log('RODANDO'))
   await getConnection().runMigrations()
@@ -11,6 +12,6 @@ connect().then(async () => {
   // await seeds.get('solutions')()
   // await seeds.get('stars')()
 }).catch(error => {
-  console.log('OCORREU Um ERRRORR')
+  console.log('OCORREU Um ERROR')
   console.log(error)
 })
