@@ -9,6 +9,7 @@ export class LoadStarsByUserRepository implements ILoadStarsByUserRepository {
     const take = 15
     const response = await baseRepository.find({
       where: { user: userId },
+      relations: ['solution'],
       skip: (skip - 1) * take,
       take
     })
