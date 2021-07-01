@@ -12,6 +12,6 @@ connect().then(async () => {
   // await seeds.get('solutions')()
   // await seeds.get('stars')()
 }).catch(error => {
-  console.log('OCORRREU Um ERROR')
+  console.log('OCORRREUU Um ERROR')
   console.log(error)
 })

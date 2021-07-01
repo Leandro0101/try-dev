@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/quotes */
-import { IMostPopularSolutionsRepository } from '@data/repositories'
+import { ILoadSolutionsByProblemRepository } from '@data/repositories'
 import { ISolutionEntity } from '@domain/entities'
 import { getQueryRunner } from '../../helpers/typeorm'
 
-export class MostPopularSolutionsRepository implements IMostPopularSolutionsRepository {
-  async execute (problemId: string, skip: number): Promise<ISolutionEntity> {
+export class LoadSolutionsByProblemRepository implements ILoadSolutionsByProblemRepository {
+  async execute (problemId: string, skip: number): Promise<ISolutionEntity[]> {
     const take = 15
     const solutions = await getQueryRunner().query(`
       SELECT s.id, s.description, s."sourceCode", 

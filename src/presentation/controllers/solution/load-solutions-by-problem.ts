@@ -1,11 +1,11 @@
 import { IController, IHttpRequest, IHttpResponse, IValidation } from '../../protocols'
-import { IMostPopularSolutionsUseCase } from '@domain/usecases'
+import { ILoadSolutionsByProblemUseCase } from '@domain/usecases'
 import { badRequest, notFound, ok, serverError } from '../../helpers/http'
 import { ResourceNotFoundError } from '../../errors'
 
-export class MostPopularSolutionsController implements IController {
+export class LoadSolutionsByProblemController implements IController {
   constructor (
-    private readonly mostPopularSolutions: IMostPopularSolutionsUseCase,
+    private readonly mostPopularSolutions: ILoadSolutionsByProblemUseCase,
     private readonly validations: IValidation) {}
 
   async handle (httpRequest: IHttpRequest): Promise<IHttpResponse> {
