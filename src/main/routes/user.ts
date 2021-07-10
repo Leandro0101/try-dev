@@ -16,7 +16,7 @@ export default (router: Router): void => {
   router.get('/users/:id', adaptRoute(makeLoadUserByIdController()))
   router.post('/verification-email', adaptMiddleware(makeAuthMiddleware('PENDING')), adaptRoute(makeSendAccountVerificationEmailController()))
   router.get('/verification/:token', adaptRoute(makeVerifyEmailController()))
-  router.patch('/redefine-password/:token', adaptRoute(makeRedefinePasswordController()))
+  router.post('/send-password-reset-email/:email', adaptRoute(makeSendPasswordResetEmailController()))
   router.patch('/redefine-password/:token', adaptRoute(makeRedefinePasswordController()))
   router.post('/password-reset/:email', adaptRoute(makeSendPasswordResetEmailController()))
 }
