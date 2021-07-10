@@ -3,5 +3,5 @@ import { AuthMiddleware } from '@presentation/middlewares/authentication'
 import { makeVerifyUserStatusService } from '../services'
 
 export const makeAuthMiddleware = (status: string = 'ACTIVE'): AuthMiddleware => {
-  return new AuthMiddleware(new JWTAdapter(), '875024b6-01d6-4c03-8486-429abe4715d9', makeVerifyUserStatusService(), status)
+  return new AuthMiddleware(new JWTAdapter(), process.env.AUTHENTICATION_TOKEN_KEY, makeVerifyUserStatusService(), status)
 }

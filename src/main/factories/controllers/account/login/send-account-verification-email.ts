@@ -3,6 +3,8 @@ import { IController } from '@presentation/protocols'
 import { makeLoadUserByIdService, makeSendAccountVerificationEmailService, makeVerifyUserStatusService } from '../../../services'
 import { makeSendAccountVerificationEmailValidation } from '../../../validations'
 import { resolve } from 'path'
+import { AddLogErrorRepository } from '@infra/typeorm/repositories'
+import { LogControllerDecorator } from '@/src/main/decorators/log'
 
 export const makeSendAccountVerificationEmailController = (): IController => {
   const emailTemplatePath = resolve(__dirname, '..', '..', '..', '..', '..', 'templates', 'email-confirmation.hbs')
@@ -12,5 +14,5 @@ export const makeSendAccountVerificationEmailController = (): IController => {
     makeVerifyUserStatusService(),
     makeSendAccountVerificationEmailValidation(), emailTemplatePath
   )
-  return controller
+  return new LogControllerDecorator(controller, new AddLogErrorRepository())
 }
