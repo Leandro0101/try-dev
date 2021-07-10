@@ -9,6 +9,14 @@ export class MostPopularProblemsService implements IMostPopularProblemsUseCase {
   async execute (paramsToLoading: IParamsToLoading): Promise<IProblemEntity[]> {
     const { intervalFinal, intervalInit, skip } = paramsToLoading
 
+    if (!intervalInit && !intervalFinal) {
+      const currentyYear = new Date().getFullYear()
+      const problems = await this.mostPopularProblems.withYearLessOrEqualThan(
+        currentyYear, skip)
+
+      return problems
+    }
+
     if (intervalInit && intervalFinal) {
       return await this.mostPopularProblems.withYearIntervalBetween(paramsToLoading)
     }
@@ -20,11 +28,5 @@ export class MostPopularProblemsService implements IMostPopularProblemsUseCase {
     if (!intervalInit) {
       return await this.mostPopularProblems.withYearLessOrEqualThan(intervalFinal, skip)
     }
-
-    const currentyYear = new Date().getFullYear()
-    const problems = await this.mostPopularProblems.withYearLessOrEqualThan(
-      currentyYear, skip)
-
-    return problems
   }
 }

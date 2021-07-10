@@ -9,8 +9,7 @@ export class MostPopularProblemsController implements IController {
 
   async handle (httpRequest: IHttpRequest): Promise<IHttpResponse> {
     try {
-      const { intervalInit, intervalFinal } = httpRequest.body
-      const { page } = httpRequest.query
+      const { intervalInit, intervalFinal, page } = httpRequest.query
       const error = this.validations.validate({ intervalInit, intervalFinal, page })
 
       if (error) return badRequest(error)
