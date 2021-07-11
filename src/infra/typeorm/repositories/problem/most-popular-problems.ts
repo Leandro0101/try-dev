@@ -6,7 +6,7 @@ import { getManager } from 'typeorm'
 export class MostPopularProblemsRepository implements IMostPopularProblemsRepository {
   readonly take = 15
   private readonly queryStart = `
-    SELECT COUNT(p.id) AS solutionsQuantity, p.id, p.title, p.description, p."createdAt"
+    SELECT p."userId", COUNT(p.id) AS solutionsQuantity, p.id, p.title, p.description, p."createdAt"
     FROM problems p INNER JOIN solutions s ON (p.id=s."problemId")`
 
   async withYearGreaterOrEqualThan (value: number, skip: number): Promise<IProblemEntity[]> {
