@@ -16,15 +16,12 @@ export class AuthMiddleware implements IMiddleware {
 
   async handle (httpRequest: IHttpRequest): Promise<IHttpResponse> {
     const authHeader = httpRequest.headers.authorization
-    console.log({ authHeader })
     if (!authHeader) return forbidden(new AccessDeniedError())
     const [, token] = authHeader.split(' ')
-    console.log({ token })
     if (!token) return forbidden(new AccessDeniedError())
     const tokenValue = await this.decrypter.decrypt(
       token, this.criptograpyKey
     )
-    console.log({ tokenValue })
     if (!tokenValue) return forbidden(new AccessDeniedError())
     const userId = Object(tokenValue).userId
     const status = IUserStatus[this.status.toUpperCase()]

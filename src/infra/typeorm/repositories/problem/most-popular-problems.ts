@@ -1,7 +1,7 @@
 import { IProblemEntity } from '@domain/entities'
 import { IMostPopularProblemsRepository } from '@data/repositories'
 import { IParamsToLoading } from '@domain/usecases'
-import { getQueryRunner } from '../../helpers/typeorm'
+import { getManager } from 'typeorm'
 
 export class MostPopularProblemsRepository implements IMostPopularProblemsRepository {
   readonly take = 15
@@ -10,7 +10,7 @@ export class MostPopularProblemsRepository implements IMostPopularProblemsReposi
     FROM problems p INNER JOIN solutions s ON (p.id=s."problemId")`
 
   async withYearGreaterOrEqualThan (value: number, skip: number): Promise<IProblemEntity[]> {
-    const problems = await getQueryRunner().query(
+    const problems = await getManager().query(
       `${this.queryStart} WHERE EXTRACT( year FROM s."createdAt") >= ${value}
       GROUP BY (p.id) ORDER BY (solutionsQuantity) DESC 
       OFFSET ${this.take * (skip - 1)} LIMIT ${this.take}`
@@ -20,7 +20,7 @@ export class MostPopularProblemsRepository implements IMostPopularProblemsReposi
   }
 
   async withYearLessOrEqualThan (value: number, skip: number): Promise<IProblemEntity[]> {
-    const problems = await getQueryRunner().query(
+    const problems = await getManager().query(
       `${this.queryStart} WHERE EXTRACT( year FROM s."createdAt") <= ${value}
       GROUP BY (p.id) ORDER BY (solutionsQuantity) DESC 
       OFFSET ${this.take * (skip - 1)} LIMIT ${this.take}`
@@ -31,7 +31,7 @@ export class MostPopularProblemsRepository implements IMostPopularProblemsReposi
   async withYearIntervalBetween (paramsToLoading: IParamsToLoading): Promise<IProblemEntity[]> {
     const { intervalInit, intervalFinal, skip } = paramsToLoading
 
-    const problems = await getQueryRunner().query(
+    const problems = await getManager().query(
       `${this.queryStart} WHERE extract( year from s."createdAt" )>=${intervalInit} 
       AND ${intervalFinal} <= extract( year from s."createdAt")
       GROUP BY (p.id)  ORDER BY (solutionsQuantity) DESC

@@ -8,6 +8,7 @@
       "module-resolver",
       {
         "alias": {
+          "@": "./",
           "@domain": "./src/domain",
           "@infra": "./src/infra",
           "@data": "./src/data",

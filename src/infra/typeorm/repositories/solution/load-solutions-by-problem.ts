@@ -1,12 +1,11 @@
 /* eslint-disable @typescript-eslint/quotes */
 import { ILoadSolutionsByProblemRepository } from '@data/repositories'
 import { ISolutionEntity } from '@domain/entities'
-import { getQueryRunner } from '../../helpers/typeorm'
-
+import { getManager } from 'typeorm'
 export class LoadSolutionsByProblemRepository implements ILoadSolutionsByProblemRepository {
   async execute (problemId: string, skip: number): Promise<ISolutionEntity[]> {
     const take = 15
-    const solutions = await getQueryRunner().query(`
+    const solutions = await getManager().query(`
       SELECT s.id, s.description, s."sourceCode", 
       CAST ( AVG (st.value) AS NUMERIC( 10,2 ) ) as average, 
       COUNT ( st.id ) AS "starsQuantity", s."createdAt"
